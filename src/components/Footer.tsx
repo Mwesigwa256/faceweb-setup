@@ -9,7 +9,7 @@ const Footer = () => {
       style={{ backgroundImage: `url(${assets.footerimg})` }}
     >
       <div className="absolute inset-0 bg-background/90 backdrop-blur-sm" />
-      <div className="relative section-container grid grid-cols-1 md:grid-cols-3 gap-10">
+      <div className="relative section-container grid grid-cols-1 md:grid-cols-4 gap-10">
         <div>
           <img src={assets.logo} alt="Face TV" className="h-12 mb-4" loading="lazy" />
           <p className="text-sm text-muted-foreground leading-relaxed">
@@ -23,12 +23,25 @@ const Footer = () => {
               { label: "Home", path: "/" },
               { label: "About", path: "/about" },
               { label: "Shows", path: "/shows" },
+              { label: "News", path: "/news" },
               { label: "Schedule", path: "/schedule" },
               { label: "Advertise", path: "/advertise" },
               { label: "Contact", path: "/contact" },
             ].map((link) => (
               <Link key={link.path} to={link.path} className="nav-link text-sm">{link.label}</Link>
             ))}
+          </div>
+        </div>
+        <div>
+          <h3 className="text-xl font-heading text-primary mb-4">Our Shows</h3>
+          <div className="flex flex-col gap-2 text-sm text-muted-foreground">
+            <span>Press Play</span>
+            <span>The Spotlight</span>
+            <span>Backyard</span>
+            <span>Club Bangerz</span>
+            <span>DJ Mix</span>
+            <span>Kikadde</span>
+            <span>Freshers</span>
           </div>
         </div>
         <div>
