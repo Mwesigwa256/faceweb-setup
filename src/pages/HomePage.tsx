@@ -1,9 +1,16 @@
 import { assets } from "@/lib/assets";
+import StatsSection from "@/components/StatsSection";
+import LiveTVSection from "@/components/LiveTVSection";
+import FeaturedShowsSection from "@/components/FeaturedShowsSection";
+import SocialSection from "@/components/SocialSection";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const HomePage = () => {
+  const { ref: brandsRef, isVisible: brandsVisible } = useScrollReveal();
+
   return (
     <div className="relative">
-      {/* Hero Video Section */}
+      {/* Hero Video Section — KEPT */}
       <section className="relative h-screen overflow-hidden">
         <video
           autoPlay
@@ -23,26 +30,47 @@ const HomePage = () => {
             FACE <span className="text-primary">TV</span>
           </h1>
           <p className="text-lg md:text-xl text-foreground/70 mt-4 max-w-xl">
-            Uganda's Premier Entertainment Platform
+            The Home of Ugandan Music
+          </p>
+          <p className="text-sm text-muted-foreground mt-2">
+            StarTimes CH 223 / ST 199 — 24 Hours, 32+ African Countries
           </p>
         </div>
       </section>
 
-      {/* Brand Logos Section */}
-      <section className="py-20" style={{ background: "var(--gradient-dark)" }}>
-        <div className="section-container flex flex-col md:flex-row items-center justify-center gap-12">
+      {/* Stats */}
+      <StatsSection />
+
+      {/* Live TV */}
+      <LiveTVSection />
+
+      {/* Featured Shows */}
+      <FeaturedShowsSection />
+
+      {/* Brand Logos Section — KEPT */}
+      <section ref={brandsRef} className="py-20" style={{ background: "var(--gradient-dark)" }}>
+        <div
+          className={`section-container flex flex-col md:flex-row items-center justify-center gap-12 transition-all duration-700 ${
+            brandsVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+        >
           <img
             src={assets.we}
             alt="We"
+            loading="lazy"
             className="h-32 md:h-44 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity"
           />
           <img
             src={assets.epg}
             alt="EPG"
+            loading="lazy"
             className="h-32 md:h-44 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity"
           />
         </div>
       </section>
+
+      {/* Social */}
+      <SocialSection />
     </div>
   );
 };
