@@ -1,28 +1,64 @@
 import { Link } from "react-router-dom";
 import { assets } from "@/lib/assets";
+import { MapPin, Phone, Mail } from "lucide-react";
 
 const Footer = () => {
   return (
     <footer
-      className="relative bg-cover bg-center py-16 mt-20"
+      className="relative bg-cover bg-center py-16"
       style={{ backgroundImage: `url(${assets.footerimg})` }}
     >
-      <div className="absolute inset-0 bg-background/85 backdrop-blur-sm" />
-      <div className="relative section-container grid grid-cols-1 md:grid-cols-2 gap-10">
+      <div className="absolute inset-0 bg-background/90 backdrop-blur-sm" />
+      <div className="relative section-container grid grid-cols-1 md:grid-cols-3 gap-10">
         <div>
-          <h3 className="text-2xl font-heading text-primary mb-4">Quick Links</h3>
+          <img src={assets.logo} alt="Face TV" className="h-12 mb-4" loading="lazy" />
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            The Home of Ugandan Music. Broadcasting 24/7 on StarTimes CH 223 across 32+ African countries.
+          </p>
+        </div>
+        <div>
+          <h3 className="text-xl font-heading text-primary mb-4">Quick Links</h3>
           <div className="flex flex-col gap-2">
-            <Link to="/" className="nav-link">Home</Link>
-            <Link to="/about" className="nav-link">About</Link>
-            <Link to="/shows" className="nav-link">Shows</Link>
-            <Link to="/contact" className="nav-link">Contact Us</Link>
+            {[
+              { label: "Home", path: "/" },
+              { label: "About", path: "/about" },
+              { label: "Shows", path: "/shows" },
+              { label: "Schedule", path: "/schedule" },
+              { label: "Advertise", path: "/advertise" },
+              { label: "Contact", path: "/contact" },
+            ].map((link) => (
+              <Link key={link.path} to={link.path} className="nav-link text-sm">{link.label}</Link>
+            ))}
           </div>
         </div>
         <div>
-          <h3 className="text-2xl font-heading text-primary mb-4">Contact</h3>
-          <p className="text-muted-foreground">Email: info@facetv.ug</p>
-          <p className="text-muted-foreground">Phone: +256 700000000</p>
+          <h3 className="text-xl font-heading text-primary mb-4">Contact</h3>
+          <div className="space-y-3 text-sm">
+            <div className="flex items-start gap-2 text-muted-foreground">
+              <MapPin size={16} className="text-primary mt-0.5 shrink-0" />
+              <span>Plot 301, Kira Road, Bukoto<br />P.O Box 15125, Kampala, Uganda</span>
+            </div>
+            <div className="flex items-center gap-2 text-muted-foreground">
+              <Phone size={16} className="text-primary shrink-0" />
+              <span>+256 701 608 228</span>
+            </div>
+            <div className="flex items-center gap-2 text-muted-foreground">
+              <Mail size={16} className="text-primary shrink-0" />
+              <span>facetvonlineug@gmail.com</span>
+            </div>
+          </div>
+          <div className="mt-4 flex gap-3 text-muted-foreground text-xs">
+            <a href="https://instagram.com/facetvuganda" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">Instagram</a>
+            <a href="https://youtube.com/@facetvuganda" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">YouTube</a>
+            <a href="https://tiktok.com/@facetvuganda" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">TikTok</a>
+            <a href="https://x.com/facetvuganda" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">X</a>
+          </div>
         </div>
+      </div>
+      <div className="relative section-container mt-10 pt-6 border-t border-border/50">
+        <p className="text-xs text-muted-foreground text-center">
+          © {new Date().getFullYear()} Face TV Uganda. All rights reserved.
+        </p>
       </div>
     </footer>
   );

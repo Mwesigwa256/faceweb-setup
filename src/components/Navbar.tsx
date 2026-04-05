@@ -7,7 +7,9 @@ const navLinks = [
   { label: "Home", path: "/" },
   { label: "About", path: "/about" },
   { label: "Shows", path: "/shows" },
-  { label: "Contact Us", path: "/contact" },
+  { label: "Schedule", path: "/schedule" },
+  { label: "Advertise", path: "/advertise" },
+  { label: "Contact", path: "/contact" },
 ];
 
 const Navbar = () => {
@@ -45,7 +47,7 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop nav */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden lg:flex items-center gap-6">
           {navLinks.map((link) => (
             <Link
               key={link.path}
@@ -59,7 +61,7 @@ const Navbar = () => {
 
         {/* Mobile toggle */}
         <button
-          className="md:hidden text-foreground"
+          className="lg:hidden text-foreground"
           onClick={() => setMobileOpen(!mobileOpen)}
         >
           {mobileOpen ? <X size={24} /> : <Menu size={24} />}
@@ -67,21 +69,23 @@ const Navbar = () => {
       </div>
 
       {/* Mobile menu */}
-      {mobileOpen && (
-        <div className="md:hidden bg-background/98 backdrop-blur-lg border-t border-border">
-          <div className="section-container py-6 flex flex-col gap-4">
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={`nav-link text-lg ${location.pathname === link.path ? "text-primary" : ""}`}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </div>
+      <div
+        className={`lg:hidden overflow-hidden transition-all duration-300 ${
+          mobileOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+        } bg-background/98 backdrop-blur-lg border-t border-border`}
+      >
+        <div className="section-container py-6 flex flex-col gap-4">
+          {navLinks.map((link) => (
+            <Link
+              key={link.path}
+              to={link.path}
+              className={`nav-link text-lg ${location.pathname === link.path ? "text-primary" : ""}`}
+            >
+              {link.label}
+            </Link>
+          ))}
         </div>
-      )}
+      </div>
     </nav>
   );
 };
