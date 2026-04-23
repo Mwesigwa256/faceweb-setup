@@ -13,12 +13,33 @@ import UpcomingEventsSection from "@/components/UpcomingEventsSection";
 import NewsletterSection from "@/components/NewsletterSection";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { ChevronDown } from "lucide-react";
+import SEO from "@/components/SEO";
 
 const HomePage = () => {
   const { ref: brandsRef, isVisible: brandsVisible } = useScrollReveal();
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "TelevisionStation",
+    name: "Face TV",
+    url: typeof window !== "undefined" ? window.location.origin : "",
+    description: "The Home of Ugandan Music — broadcasting 24 hours across 32+ African countries on StarTimes CH 223 / ST 199.",
+    sameAs: [
+      "https://facebook.com",
+      "https://instagram.com",
+      "https://twitter.com",
+      "https://youtube.com",
+    ],
+  };
+
   return (
     <div className="relative">
+      <SEO
+        title="Face TV — The Home of Ugandan Music | 24/7 Live"
+        description="Face TV is the home of Ugandan music. Watch live on StarTimes CH 223 / ST 199 across 32+ African countries — shows, news, artists and more."
+        image={assets.we}
+        jsonLd={jsonLd}
+      />
       {/* Hero Video Section */}
       <section className="relative h-screen overflow-hidden">
         <video
