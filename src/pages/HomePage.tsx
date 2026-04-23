@@ -6,6 +6,11 @@ import SocialSection from "@/components/SocialSection";
 import ClientsSection from "@/components/ClientsSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import ArtistsShowcase from "@/components/ArtistsShowcase";
+import BreakingNewsTicker from "@/components/BreakingNewsTicker";
+import OurBrandsSection from "@/components/OurBrandsSection";
+import LatestNewsGrid from "@/components/LatestNewsGrid";
+import UpcomingEventsSection from "@/components/UpcomingEventsSection";
+import NewsletterSection from "@/components/NewsletterSection";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { ChevronDown } from "lucide-react";
 
