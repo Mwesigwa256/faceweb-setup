@@ -6,6 +6,11 @@ import SocialSection from "@/components/SocialSection";
 import ClientsSection from "@/components/ClientsSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import ArtistsShowcase from "@/components/ArtistsShowcase";
+import BreakingNewsTicker from "@/components/BreakingNewsTicker";
+import OurBrandsSection from "@/components/OurBrandsSection";
+import LatestNewsGrid from "@/components/LatestNewsGrid";
+import UpcomingEventsSection from "@/components/UpcomingEventsSection";
+import NewsletterSection from "@/components/NewsletterSection";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { ChevronDown } from "lucide-react";
 
@@ -61,6 +66,9 @@ const HomePage = () => {
         </div>
       </section>
 
+      {/* Breaking news ticker */}
+      <BreakingNewsTicker />
+
       {/* Stats */}
       <StatsSection />
 
@@ -68,6 +76,9 @@ const HomePage = () => {
       <div id="live">
         <LiveTVSection />
       </div>
+
+      {/* Latest News (magazine grid) */}
+      <LatestNewsGrid />
 
       {/* Artists Showcase */}
       <ArtistsShowcase />
@@ -77,11 +88,20 @@ const HomePage = () => {
         <FeaturedShowsSection />
       </div>
 
+      {/* Our Brands / Family */}
+      <OurBrandsSection />
+
+      {/* Upcoming events */}
+      <UpcomingEventsSection />
+
       {/* Clients */}
       <ClientsSection />
 
       {/* Testimonials */}
       <TestimonialsSection />
+
+      {/* Newsletter CTA */}
+      <NewsletterSection />
 
       {/* Brand Logos */}
       <section ref={brandsRef} className="py-20" style={{ background: "var(--gradient-dark)" }}>
