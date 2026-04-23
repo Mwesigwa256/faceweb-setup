@@ -175,10 +175,10 @@ const ShowsPage = () => {
                 >
                   <video
                     ref={(el) => { videoRefs.current[index] = el; }}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    muted
+                    className="w-full h-full object-cover transition-transform duration-500"
                     playsInline
                     loop
+                    controls={activeIndex === index}
                   >
                     <source src={show.video} type="video/mp4" />
                   </video>
