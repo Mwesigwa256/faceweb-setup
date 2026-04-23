@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { assets } from "@/lib/assets";
 import { Play, Pause, Filter } from "lucide-react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import SEO from "@/components/SEO";
 
 type Category = "All" | "Music" | "Entertainment" | "Lifestyle" | "Party";
 
@@ -103,6 +104,11 @@ const ShowsPage = () => {
 
   return (
     <div>
+      <SEO
+        title="Our Shows — 24/7 Ugandan Music & Entertainment | Face TV"
+        description="Explore Face TV's 8 original programs: Press Play, The Spotlight, Backyard, Club Bangerz, Kikadde and more — 24 hours of Ugandan music & entertainment."
+        image={assets.faceHome}
+      />
       {/* Hero */}
       <section className="relative h-[50vh] overflow-hidden flex items-center justify-center">
         <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover">
