@@ -1,5 +1,6 @@
+import { useRef, useState } from "react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { Play } from "lucide-react";
+import { Play, Pause, Volume2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { assets } from "@/lib/assets";
 
@@ -12,6 +13,40 @@ const shows = [
 
 const FeaturedShowsSection = () => {
   const { ref, isVisible } = useScrollReveal();
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
+  const togglePlay = (index: number) => {
+    const video = videoRefs.current[index];
+    if (!video) return;
+
+    if (activeIndex === index) {
+      video.pause();
+      setActiveIndex(null);
+      return;
+    }
+
+    // pause any other playing video
+    if (activeIndex !== null && videoRefs.current[activeIndex]) {
+      const prev = videoRefs.current[activeIndex]!;
+      prev.pause();
+      prev.muted = true;
+    }
+
+    video.muted = false;
+    video.volume = 1;
+    video.currentTime = 0;
+    const p = video.play();
+    if (p && typeof p.then === "function") {
+      p.then(() => setActiveIndex(index)).catch(() => {
+        // fallback: try muted if browser blocks
+        video.muted = true;
+        video.play().then(() => setActiveIndex(index)).catch(() => {});
+      });
+    } else {
+      setActiveIndex(index);
+    }
+  };
 
   return (
     <section ref={ref} className="py-20" style={{ background: "var(--gradient-dark)" }}>
@@ -32,22 +67,34 @@ const FeaturedShowsSection = () => {
               }`}
               style={{ transitionDelay: `${i * 120}ms` }}
             >
-              <div className="relative aspect-video overflow-hidden">
+              <div
+                className="relative aspect-video overflow-hidden cursor-pointer"
+                onClick={() => togglePlay(i)}
+              >
                 <video
-                  muted
+                  ref={(el) => { videoRefs.current[i] = el; }}
                   playsInline
                   loop
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  onMouseEnter={(e) => e.currentTarget.play()}
-                  onMouseLeave={(e) => { e.currentTarget.pause(); e.currentTarget.currentTime = 0; }}
+                  controls={activeIndex === i}
+                  className="w-full h-full object-cover"
                 >
                   <source src={show.video} type="video/mp4" />
                 </video>
-                <div className="absolute inset-0 bg-background/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="w-12 h-12 rounded-full bg-primary/90 flex items-center justify-center">
-                    <Play className="text-primary-foreground ml-0.5" size={20} />
+
+                {activeIndex !== i && (
+                  <div className="absolute inset-0 bg-background/40 flex items-center justify-center opacity-100 group-hover:bg-background/30 transition-all duration-300">
+                    <div className="w-14 h-14 rounded-full bg-primary/90 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                      <Play className="text-primary-foreground ml-0.5" size={22} />
+                    </div>
                   </div>
-                </div>
+                )}
+
+                {activeIndex === i && (
+                  <div className="absolute top-3 right-3 flex items-center gap-1.5 bg-primary/90 px-3 py-1 rounded-full pointer-events-none">
+                    <Volume2 size={12} className="text-primary-foreground" />
+                    <span className="text-xs font-bold text-primary-foreground uppercase">Playing</span>
+                  </div>
+                )}
               </div>
               <div className="p-4">
                 <h3 className="font-heading text-xl text-foreground">{show.title}</h3>

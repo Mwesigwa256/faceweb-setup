@@ -90,15 +90,25 @@ const ShowsPage = () => {
 
     if (activeIndex === index) {
       video.pause();
-      video.currentTime = 0;
       setActiveIndex(null);
     } else {
       if (activeIndex !== null && videoRefs.current[activeIndex]) {
-        videoRefs.current[activeIndex]!.pause();
-        videoRefs.current[activeIndex]!.currentTime = 0;
+        const prev = videoRefs.current[activeIndex]!;
+        prev.pause();
+        prev.muted = true;
       }
-      setActiveIndex(index);
-      video.play();
+      video.muted = false;
+      video.volume = 1;
+      video.currentTime = 0;
+      const p = video.play();
+      if (p && typeof p.then === "function") {
+        p.then(() => setActiveIndex(index)).catch(() => {
+          video.muted = true;
+          video.play().then(() => setActiveIndex(index)).catch(() => {});
+        });
+      } else {
+        setActiveIndex(index);
+      }
     }
   };
 
@@ -165,10 +175,10 @@ const ShowsPage = () => {
                 >
                   <video
                     ref={(el) => { videoRefs.current[index] = el; }}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    muted
+                    className="w-full h-full object-cover transition-transform duration-500"
                     playsInline
                     loop
+                    controls={activeIndex === index}
                   >
                     <source src={show.video} type="video/mp4" />
                   </video>
