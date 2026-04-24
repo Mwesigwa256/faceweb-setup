@@ -134,7 +134,7 @@ const ShowsPage = () => {
       </section>
 
       {/* Category Filter */}
-      <section className="py-8 bg-background border-b border-border/50 sticky top-16 md:top-20 z-30 backdrop-blur-md bg-background/95">
+      <section className="py-8 bg-background border-b border-border/50">
         <div className="section-container">
           <div className="flex items-center gap-3 flex-wrap justify-center">
             <Filter size={18} className="text-primary" />
