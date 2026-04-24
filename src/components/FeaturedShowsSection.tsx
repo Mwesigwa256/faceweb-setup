@@ -75,16 +75,18 @@ const FeaturedShowsSection = () => {
                   ref={(el) => { videoRefs.current[i] = el; }}
                   playsInline
                   loop
+                  muted
+                  preload="metadata"
                   controls={activeIndex === i}
                   className="w-full h-full object-cover"
                 >
-                  <source src={show.video} type="video/mp4" />
+                  <source src={`${show.video}#t=0.5`} type="video/mp4" />
                 </video>
 
                 {activeIndex !== i && (
-                  <div className="absolute inset-0 bg-background/40 flex items-center justify-center opacity-100 group-hover:bg-background/30 transition-all duration-300">
-                    <div className="w-14 h-14 rounded-full bg-primary/90 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-                      <Play className="text-primary-foreground ml-0.5" size={22} />
+                  <div className="absolute inset-0 bg-background/40 flex items-center justify-center transition-all duration-300 group-hover:bg-background/30">
+                    <div className="w-20 h-20 md:w-16 md:h-16 rounded-full bg-primary/90 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform active:scale-95">
+                      <Play className="text-primary-foreground ml-1" size={32} />
                     </div>
                   </div>
                 )}

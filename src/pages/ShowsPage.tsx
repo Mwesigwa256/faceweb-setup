@@ -134,7 +134,7 @@ const ShowsPage = () => {
       </section>
 
       {/* Category Filter */}
-      <section className="py-8 bg-background border-b border-border/50 sticky top-16 md:top-20 z-30 backdrop-blur-md bg-background/95">
+      <section className="py-8 bg-background border-b border-border/50">
         <div className="section-container">
           <div className="flex items-center gap-3 flex-wrap justify-center">
             <Filter size={18} className="text-primary" />
@@ -178,22 +178,21 @@ const ShowsPage = () => {
                     className="w-full h-full object-cover transition-transform duration-500"
                     playsInline
                     loop
+                    muted
+                    preload="metadata"
                     controls={activeIndex === index}
                   >
-                    <source src={show.video} type="video/mp4" />
+                    <source src={`${show.video}#t=0.5`} type="video/mp4" />
                   </video>
 
-                  {/* Overlay */}
-                  <div className="absolute inset-0 bg-background/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="w-16 h-16 rounded-full bg-primary/90 flex items-center justify-center">
-                      {activeIndex === index ? (
-                        <Pause className="text-primary-foreground" size={28} />
-                      ) : (
-                        <Play className="text-primary-foreground ml-1" size={28} />
-                      )}
+                  {/* Overlay — visible on mobile, hover on desktop */}
+                  {activeIndex !== index && (
+                    <div className="absolute inset-0 bg-background/30 flex items-center justify-center md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="w-20 h-20 md:w-16 md:h-16 rounded-full bg-primary/90 flex items-center justify-center shadow-xl active:scale-95 transition-transform">
+                        <Play className="text-primary-foreground ml-1" size={32} />
+                      </div>
                     </div>
-                  </div>
-
+                  )}
                   {/* Category badge */}
                   <div className="absolute top-3 left-3">
                     <span
