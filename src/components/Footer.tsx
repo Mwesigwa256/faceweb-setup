@@ -27,6 +27,7 @@ const Footer = () => {
               { label: "Schedule", path: "/schedule" },
               { label: "Advertise", path: "/advertise" },
               { label: "Contact", path: "/contact" },
+              { label: "Install App", path: "/install" },
             ].map((link) => (
               <Link key={link.path} to={link.path} className="nav-link text-sm">{link.label}</Link>
             ))}
