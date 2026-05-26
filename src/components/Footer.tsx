@@ -52,10 +52,15 @@ const Footer = () => {
               <MapPin size={16} className="text-primary mt-0.5 shrink-0" />
               <span>Plot 301, Kira Road, Bukoto<br />P.O Box 15125, Kampala, Uganda</span>
             </div>
-            <div className="flex items-center gap-2 text-muted-foreground">
-              <Phone size={16} className="text-primary shrink-0" />
-              <span>+256 701 608 228</span>
-            </div>
+            <a
+              href="https://wa.me/256748624400"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors cursor-pointer group"
+            >
+              <Phone size={16} className="text-primary shrink-0 group-hover:scale-110 transition-transform" />
+              <span>+256 748 624 400</span>
+            </a>
             <div className="flex items-center gap-2 text-muted-foreground">
               <Mail size={16} className="text-primary shrink-0" />
               <span>facetvonlineug@gmail.com</span>
