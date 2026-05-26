@@ -91,13 +91,18 @@ const ContactPage = () => {
                   <p className="text-foreground text-sm">P.O Box 15125, Kampala, Uganda</p>
                 </div>
               </div>
-              <div className="glass-card p-6 flex items-start gap-4">
-                <Phone className="text-primary mt-1 shrink-0" size={22} />
+              <a
+                href="https://wa.me/256748624400"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass-card p-6 flex items-start gap-4 hover:border-primary/40 transition-colors group cursor-pointer"
+              >
+                <Phone className="text-primary mt-1 shrink-0 group-hover:scale-110 transition-transform" size={22} />
                 <div>
-                  <p className="text-sm text-muted-foreground">Phone</p>
-                  <p className="text-foreground">+256 701 608 228</p>
+                  <p className="text-sm text-muted-foreground">WhatsApp Hotline</p>
+                  <p className="text-foreground group-hover:text-primary transition-colors">+256 748 624 400</p>
                 </div>
-              </div>
+              </a>
               <div className="glass-card p-6 flex items-start gap-4">
                 <Mail className="text-primary mt-1 shrink-0" size={22} />
                 <div>
