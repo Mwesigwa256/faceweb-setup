@@ -13,6 +13,7 @@ import SchedulePage from "@/pages/SchedulePage";
 import AdvertisePage from "@/pages/AdvertisePage";
 import ContactPage from "@/pages/ContactPage";
 import InstallPage from "@/pages/InstallPage";
+import SubmitMusicPage from "@/pages/SubmitMusicPage";
 import NotFound from "@/pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -34,6 +35,7 @@ const App = () => (
             <Route path="/advertise" element={<AdvertisePage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/install" element={<InstallPage />} />
+            <Route path="/submit-music" element={<SubmitMusicPage />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

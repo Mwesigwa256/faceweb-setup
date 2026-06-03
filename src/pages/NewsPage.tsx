@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
+import AnimatedSection from "@/components/AnimatedSection";
+import { motion } from "framer-motion";
 import { assets } from "@/lib/assets";
 import { Clock, TrendingUp, ArrowRight } from "lucide-react";
 import SEO from "@/components/SEO";
 import { newsArticles } from "@/lib/news";
 
 const NewsPage = () => {
-  const { ref: gridRef, isVisible: gridVisible } = useScrollReveal();
   const featured = newsArticles.find((a) => a.featured);
   const rest = newsArticles.filter((a) => !a.featured);
 
@@ -33,7 +33,7 @@ const NewsPage = () => {
 
       {/* Featured Article */}
       {featured && (
-        <section className="py-16" style={{ background: "var(--gradient-dark)" }}>
+        <AnimatedSection className="py-16" style={{ background: "var(--gradient-dark)" }}>
           <div className="section-container">
             <div className="flex items-center gap-2 mb-6">
               <TrendingUp className="text-primary" size={20} />
@@ -41,15 +41,15 @@ const NewsPage = () => {
             </div>
             <Link
               to={`/news/${featured.slug}`}
-              className="block glass-card p-8 md:p-12 hover:border-primary/50 transition-all duration-300 cursor-pointer group"
+              className="block glass-card p-8 md:p-12 hover:border-primary/50 transition-all duration-300 cursor-pointer group hover:scale-[1.02]"
             >
               <span
-                className="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-primary-foreground mb-4"
+                className="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-primary-foreground mb-4 shadow-[0_0_10px_rgba(255,0,0,0.5)]"
                 style={{ background: "var(--gradient-primary)" }}
               >
                 {featured.category}
               </span>
-              <h2 className="text-3xl md:text-5xl font-heading text-foreground mb-4 group-hover:text-primary transition-colors">
+              <h2 className="text-3xl md:text-5xl font-heading text-foreground mb-4 group-hover:text-primary transition-colors drop-shadow-sm">
                 {featured.title}
               </h2>
               <p className="text-lg text-muted-foreground max-w-3xl mb-4">{featured.excerpt}</p>
@@ -61,46 +61,53 @@ const NewsPage = () => {
               </div>
             </Link>
           </div>
-        </section>
+        </AnimatedSection>
       )}
 
       {/* News Grid */}
-      <section ref={gridRef} className="py-16 bg-background">
+      <AnimatedSection className="py-16 bg-background">
         <div className="section-container">
           <h2 className="text-3xl font-heading text-foreground mb-8">
             More <span className="text-primary">Stories</span>
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <motion.div 
+            initial="hidden" 
+            whileInView="visible" 
+            viewport={{ once: true, margin: "-50px" }}
+            variants={{
+              hidden: { opacity: 0 },
+              visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
+            }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
             {rest.map((article, i) => (
-              <Link
-                to={`/news/${article.slug}`}
-                key={article.slug}
-                className={`glass-card p-6 group cursor-pointer hover:border-primary/50 transition-all duration-700 ${
-                  gridVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-                }`}
-                style={{ transitionDelay: `${i * 80}ms` }}
-              >
-                <span
-                  className="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-primary-foreground mb-3"
-                  style={{ background: "var(--gradient-primary)" }}
+              <motion.div key={article.slug} variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } }}>
+                <Link
+                  to={`/news/${article.slug}`}
+                  className="block glass-card p-6 group cursor-pointer hover:border-primary transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_10px_30px_rgba(255,0,0,0.1)] h-full"
                 >
-                  {article.category}
-                </span>
-                <h3 className="font-heading text-xl text-foreground mb-2 group-hover:text-primary transition-colors">
-                  {article.title}
-                </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed mb-4">{article.excerpt}</p>
-                <div className="flex items-center justify-between text-xs text-muted-foreground">
-                  <span className="flex items-center gap-1"><Clock size={12} /> {article.date}</span>
-                  <span className="flex items-center gap-1 text-primary font-semibold group-hover:gap-2 transition-all">
-                    Read <ArrowRight size={12} />
+                  <span
+                    className="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-primary-foreground mb-3"
+                    style={{ background: "var(--gradient-primary)" }}
+                  >
+                    {article.category}
                   </span>
-                </div>
-              </Link>
+                  <h3 className="font-heading text-xl text-foreground mb-2 group-hover:text-primary transition-colors">
+                    {article.title}
+                  </h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-4">{article.excerpt}</p>
+                  <div className="flex items-center justify-between text-xs text-muted-foreground mt-auto pt-4">
+                    <span className="flex items-center gap-1"><Clock size={12} /> {article.date}</span>
+                    <span className="flex items-center gap-1 text-primary font-semibold group-hover:gap-2 transition-all">
+                      Read <ArrowRight size={12} />
+                    </span>
+                  </div>
+                </Link>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </AnimatedSection>
     </div>
   );
 };

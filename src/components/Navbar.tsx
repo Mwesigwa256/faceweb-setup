@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { assets } from "@/lib/assets";
-import { Menu, X, Sun, Moon } from "lucide-react";
+import { Menu, X, Sun, Moon, Upload } from "lucide-react";
 import { useTheme } from "@/hooks/useTheme";
 
 const navLinks = [
@@ -40,9 +40,9 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={`fixed left-0 right-0 z-50 transition-all duration-500 ${
         visible ? "translate-y-0" : "-translate-y-full"
-      } ${solid ? "bg-background/95 backdrop-blur-md shadow-lg" : "bg-transparent"}`}
+      } ${solid ? "top-0 bg-background/95 backdrop-blur-md shadow-lg" : "top-4 bg-transparent"}`}
     >
       <div className="section-container flex items-center justify-between h-16 md:h-20">
         <Link to="/" className="flex items-center gap-2">
@@ -60,6 +60,13 @@ const Navbar = () => {
               {link.label}
             </Link>
           ))}
+          <Link
+            to="/submit-music"
+            className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-red-600 to-red-800 text-white text-sm font-bold uppercase tracking-wider rounded-full hover:from-red-700 hover:to-red-900 transition-all shadow-md hover:shadow-lg hover:scale-105 active:scale-95"
+          >
+            <Upload size={18} />
+            Upload Music
+          </Link>
           <button
             onClick={toggleTheme}
             className="ml-2 p-2 rounded-full bg-muted hover:bg-primary/20 transition-colors duration-300"
@@ -103,6 +110,13 @@ const Navbar = () => {
               {link.label}
             </Link>
           ))}
+          <Link
+            to="/submit-music"
+            className="flex items-center justify-center gap-2 px-4 py-3 mt-2 bg-gradient-to-r from-red-600 to-red-800 text-white text-base font-bold uppercase tracking-wider rounded-xl hover:from-red-700 hover:to-red-900 transition-all shadow-md"
+          >
+            <Upload size={20} />
+            Upload Music
+          </Link>
         </div>
       </div>
     </nav>

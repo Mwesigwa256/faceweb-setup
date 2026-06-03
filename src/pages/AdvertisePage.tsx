@@ -1,6 +1,7 @@
-import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Megaphone, Mail, Phone, MapPin, ArrowRight, Sun, Sparkles, TrendingUp, Flame, Moon } from "lucide-react";
 import { NavLink as Link } from "@/components/NavLink";
+import AnimatedSection from "@/components/AnimatedSection";
+import { motion } from "framer-motion";
 
 const spotAds = [
   { segment: "Early Prime", time: "7:00am – 12:00pm", s15: "70,000", s30: "120,000", s45: "250,000", s60: "250,000" },
@@ -11,9 +12,6 @@ const spotAds = [
 ];
 
 const AdvertisePage = () => {
-  const { ref: rateRef, isVisible: rateVisible } = useScrollReveal();
-  const { ref: whyRef, isVisible: whyVisible } = useScrollReveal();
-  const { ref: ctaRef, isVisible: ctaVisible } = useScrollReveal();
 
   const getSegmentIcon = (segment: string) => {
     switch (segment) {
@@ -43,7 +41,7 @@ const AdvertisePage = () => {
       </section>
 
       {/* Why Advertise Section */}
-      <section ref={whyRef} className="py-24 bg-background border-t border-border/40">
+      <AnimatedSection className="py-24 bg-background border-t border-border/40">
         <div className="section-container">
           <div className="text-center max-w-2xl mx-auto mb-16">
             <h2 className="text-3xl md:text-5xl font-heading text-foreground">
@@ -52,7 +50,16 @@ const AdvertisePage = () => {
             <div className="w-16 h-1 mt-3 bg-primary mx-auto rounded-full" />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            variants={{
+              hidden: { opacity: 0 },
+              visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
+            }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+          >
             {[
               { 
                 title: "Massive Reach", 
@@ -67,23 +74,21 @@ const AdvertisePage = () => {
                 desc: "Your brand plays alongside Uganda's biggest music videos, celebrity news, and chart-topping shows." 
               },
             ].map((item, i) => (
-              <div
+              <motion.div
                 key={item.title}
-                className={`glass-card p-8 border border-border/40 hover:border-primary/30 transition-all duration-500 hover:-translate-y-1 ${
-                  whyVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-                }`}
-                style={{ transitionDelay: `${i * 150}ms` }}
+                variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } }}
+                className="glass-card p-8 border border-border/40 hover:border-primary/30 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_10px_30px_rgba(255,0,0,0.1)]"
               >
                 <h3 className="font-heading text-2xl text-primary mb-3">{item.title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </AnimatedSection>
 
       {/* Rate Card Section */}
-      <section ref={rateRef} className="py-24 border-t border-border/40" style={{ background: "var(--gradient-dark)" }}>
+      <AnimatedSection className="py-24 border-t border-border/40" style={{ background: "var(--gradient-dark)" }}>
         <div className="section-container">
           <div className="text-center max-w-2xl mx-auto mb-16">
             <h2 className="text-3xl md:text-5xl font-heading text-foreground">
@@ -93,11 +98,7 @@ const AdvertisePage = () => {
             <p className="text-muted-foreground mt-4">Prices are in UGX per single spot transmission</p>
           </div>
 
-          <div
-            className={`glass-card overflow-hidden shadow-2xl transition-all duration-700 border border-border/40 ${
-              rateVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-            }`}
-          >
+          <div className="glass-card overflow-hidden shadow-2xl transition-all duration-700 border border-border/40">
             <div className="overflow-x-auto">
               <table className="w-full min-w-[650px]">
                 <thead>
@@ -129,14 +130,12 @@ const AdvertisePage = () => {
             </div>
           </div>
         </div>
-      </section>
+      </AnimatedSection>
 
       {/* Improved Unified Contact/Partnership CTA Section */}
-      <section ref={ctaRef} className="py-24 bg-background border-t border-border/40">
+      <AnimatedSection className="py-24 bg-background border-t border-border/40">
         <div className="section-container max-w-4xl">
-          <div className={`glass-card p-10 md:p-14 border border-primary/20 shadow-2xl relative overflow-hidden transition-all duration-700 ${
-            ctaVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}>
+          <div className="glass-card p-10 md:p-14 border border-primary/20 shadow-2xl relative overflow-hidden transition-all duration-700">
             <div className="absolute top-0 right-0 bg-primary/10 text-primary text-[10px] uppercase font-bold tracking-widest px-6 py-2 rounded-bl-lg border-l border-b border-primary/20">
               Partner With Us
             </div>
@@ -196,7 +195,7 @@ const AdvertisePage = () => {
             </div>
           </div>
         </div>
-      </section>
+      </AnimatedSection>
     </div>
   );
 };

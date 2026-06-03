@@ -1,6 +1,6 @@
 import { assets } from "@/lib/assets";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Target, Eye, Gem, Award } from "lucide-react";
+import AnimatedSection from "@/components/AnimatedSection";
 
 const values = [
   { letter: "F", word: "Fairness" },
@@ -23,10 +23,6 @@ const objectives = [
 const topTowns = ["Kampala", "Mbale", "Masaka", "Jinja", "Mukono", "Iganga", "Gulu", "Arua", "Mbarara", "Lira"];
 
 const AboutPage = () => {
-  const { ref: missionRef, isVisible: missionVisible } = useScrollReveal();
-  const { ref: valuesRef, isVisible: valuesVisible } = useScrollReveal();
-  const { ref: objRef, isVisible: objVisible } = useScrollReveal();
-  const { ref: reachRef, isVisible: reachVisible } = useScrollReveal();
 
   return (
     <div>
@@ -45,7 +41,8 @@ const AboutPage = () => {
       </section>
 
       {/* Who We Are — Enhanced */}
-      <section className="py-20" style={{ background: "var(--gradient-dark)" }}>
+      {/* Who We Are — Enhanced */}
+      <AnimatedSection className="py-20" style={{ background: "var(--gradient-dark)" }}>
         <div className="section-container max-w-4xl">
           <h2 className="text-3xl md:text-4xl font-heading text-foreground mb-6">
             Who <span className="text-primary">We Are</span>
@@ -60,16 +57,13 @@ const AboutPage = () => {
             FACE TV is the first and only channel in Uganda and across Africa that plays solely Ugandan music content and features Uganda's broadest mix of contemporary artists and music genres. We support, promote and celebrate the talent and creativity of Ugandan artists, video directors, record labels and producers.
           </p>
         </div>
-      </section>
+      </AnimatedSection>
 
       {/* Vision & Mission */}
-      <section ref={missionRef} className="py-20 bg-background">
+      {/* Vision & Mission */}
+      <AnimatedSection className="py-20 bg-background">
         <div className="section-container max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-10">
-          <div
-            className={`glass-card p-8 transition-all duration-700 ${
-              missionVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
-            }`}
-          >
+          <div className="glass-card p-8">
             <div className="flex items-center gap-3 mb-4">
               <Eye className="text-primary" size={28} />
               <h3 className="text-2xl font-heading text-foreground">Our Vision</h3>
@@ -78,11 +72,7 @@ const AboutPage = () => {
               To make FACE TV the biggest Ugandan music channel on the continent. FACE TV is the ultimate recognition of Ugandan Music globally — <span className="text-primary font-semibold">"THE HOME OF UGANDAN MUSIC"</span>.
             </p>
           </div>
-          <div
-            className={`glass-card p-8 transition-all duration-700 delay-200 ${
-              missionVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"
-            }`}
-          >
+          <div className="glass-card p-8">
             <div className="flex items-center gap-3 mb-4">
               <Target className="text-primary" size={28} />
               <h3 className="text-2xl font-heading text-foreground">Our Mission</h3>
@@ -95,10 +85,11 @@ const AboutPage = () => {
             </ul>
           </div>
         </div>
-      </section>
+      </AnimatedSection>
 
       {/* Values */}
-      <section ref={valuesRef} className="py-20" style={{ background: "var(--gradient-dark)" }}>
+      {/* Values */}
+      <AnimatedSection className="py-20" style={{ background: "var(--gradient-dark)" }}>
         <div className="section-container text-center">
           <Gem className="mx-auto mb-3 text-primary" size={28} />
           <h2 className="text-3xl md:text-4xl font-heading text-foreground mb-2">
@@ -109,10 +100,7 @@ const AboutPage = () => {
             {values.map((v, i) => (
               <div
                 key={v.letter}
-                className={`glass-card p-4 transition-all duration-500 hover:border-primary/50 ${
-                  valuesVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-                }`}
-                style={{ transitionDelay: `${i * 100}ms` }}
+                className="glass-card p-4 hover:border-primary/50"
               >
                 <p className="text-3xl font-heading text-primary">{v.letter}</p>
                 <p className="text-xs text-muted-foreground mt-1 uppercase tracking-wider">{v.word}</p>
@@ -120,10 +108,11 @@ const AboutPage = () => {
             ))}
           </div>
         </div>
-      </section>
+      </AnimatedSection>
 
       {/* Objectives */}
-      <section ref={objRef} className="py-20 bg-background">
+      {/* Objectives */}
+      <AnimatedSection className="py-20 bg-background">
         <div className="section-container max-w-4xl">
           <div className="flex items-center gap-3 mb-8">
             <Award className="text-primary" size={28} />
@@ -135,10 +124,7 @@ const AboutPage = () => {
             {objectives.map((obj, i) => (
               <div
                 key={i}
-                className={`glass-card p-5 transition-all duration-500 ${
-                  objVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-                }`}
-                style={{ transitionDelay: `${i * 100}ms` }}
+                className="glass-card p-5 hover:border-primary/30 transition-all"
               >
                 <p className="text-muted-foreground text-sm leading-relaxed">
                   <span className="text-primary font-heading text-lg mr-2">0{i + 1}</span>
@@ -148,10 +134,11 @@ const AboutPage = () => {
             ))}
           </div>
         </div>
-      </section>
+      </AnimatedSection>
 
       {/* Reach */}
-      <section ref={reachRef} className="py-20" style={{ background: "var(--gradient-dark)" }}>
+      {/* Reach */}
+      <AnimatedSection className="py-20" style={{ background: "var(--gradient-dark)" }}>
         <div className="section-container max-w-4xl">
           <h2 className="text-3xl md:text-4xl font-heading text-foreground text-center mb-4">
             Our <span className="text-primary">Reach</span>
@@ -159,11 +146,7 @@ const AboutPage = () => {
           <p className="text-muted-foreground text-center mb-10">
             Top towns with highest Face TV viewership in Uganda
           </p>
-          <div
-            className={`flex flex-wrap justify-center gap-3 transition-all duration-700 ${
-              reachVisible ? "opacity-100" : "opacity-0"
-            }`}
-          >
+          <div className="flex flex-wrap justify-center gap-3">
             {topTowns.map((town) => (
               <span
                 key={town}
@@ -177,7 +160,7 @@ const AboutPage = () => {
             Target audience: 15–45 years • Young urban youth • Small businesses • Universities • Freelancers
           </p>
         </div>
-      </section>
+      </AnimatedSection>
     </div>
   );
 };

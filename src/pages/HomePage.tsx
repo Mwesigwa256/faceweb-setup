@@ -14,6 +14,8 @@ import NewsletterSection from "@/components/NewsletterSection";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { ChevronDown } from "lucide-react";
 import SEO from "@/components/SEO";
+import { motion } from "framer-motion";
+import AnimatedSection from "@/components/AnimatedSection";
 
 const HomePage = () => {
   const { ref: brandsRef, isVisible: brandsVisible } = useScrollReveal();
@@ -33,7 +35,10 @@ const HomePage = () => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative bg-black">
+      {/* Subtle CRT Noise Overlay */}
+      <div className="tv-noise" />
+
       <SEO
         title="Face TV — The Home of Ugandan Music | 24/7 Live"
         description="Face TV is the home of Ugandan music. Watch live on StarTimes CH 223 / ST 199 across 32+ African countries — shows, news, artists and more."
@@ -55,31 +60,70 @@ const HomePage = () => {
           className="absolute inset-0"
           style={{ background: "var(--hero-overlay)" }}
         />
+        
+        {/* Background Scrolling Artist Ticker (Very transparent, huge font) */}
+        <div className="absolute inset-0 flex flex-col justify-center opacity-10 pointer-events-none overflow-hidden z-0 rotate-[-5deg] scale-110">
+          <div className="whitespace-nowrap animate-marquee text-[15rem] font-heading text-outline uppercase leading-none">
+            UGANDA • AFROBEATS • DANCEHALL • HIPHOP • R&B • GOSPEL • KADONGO KAMU • UGANDA • AFROBEATS • DANCEHALL • HIPHOP • R&B • GOSPEL • KADONGO KAMU •
+          </div>
+          <div className="whitespace-nowrap animate-marquee text-[15rem] font-heading text-outline uppercase leading-none mt-10" style={{ animationDirection: 'reverse', animationDuration: '40s' }}>
+            JOSE CHAMELEONE • BEBE COOL • BOUNTY KILLER • SHEEBAH • AZAWI • VINKA • EDDY KENZO • JOSE CHAMELEONE • BEBE COOL • BOUNTY KILLER • SHEEBAH • AZAWI • VINKA • EDDY KENZO •
+          </div>
+        </div>
+
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-center section-container">
-          <h1 className="text-6xl md:text-8xl lg:text-9xl font-heading text-foreground tracking-wider glow-text">
-            FACE <span className="text-primary">TV</span>
-          </h1>
-          <p className="text-lg md:text-xl text-foreground/70 mt-4 max-w-xl">
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0, filter: "blur(10px)" }}
+            animate={{ scale: 1, opacity: 1, filter: "blur(0px)" }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            className="glitch-wrapper"
+          >
+            <h1 
+              className="text-7xl md:text-9xl lg:text-[12rem] font-heading text-white tracking-widest drop-shadow-[0_0_30px_rgba(255,0,0,0.8)] glitch" 
+              data-text="FACE TV"
+            >
+              FACE <span className="text-primary">TV</span>
+            </h1>
+          </motion.div>
+          
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
+            className="text-lg md:text-2xl font-bold text-foreground mt-4 max-w-xl uppercase tracking-[0.2em] drop-shadow-md"
+          >
             The Home of Ugandan Music
-          </p>
-          <p className="text-sm text-muted-foreground mt-2">
+          </motion.p>
+          
+          <motion.p 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1, duration: 1 }}
+            className="text-sm md:text-base text-muted-foreground mt-3 font-medium bg-black/40 px-6 py-2 rounded-full border border-white/10 backdrop-blur-sm"
+          >
             StarTimes CH 223 / ST 199 — 24 Hours, 32+ African Countries
-          </p>
-          <div className="mt-8 flex gap-4">
+          </motion.p>
+          
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.2, duration: 0.8 }}
+            className="mt-10 flex gap-6"
+          >
             <a
               href="#live"
-              className="px-8 py-3 rounded-full font-semibold text-primary-foreground transition-all duration-300 hover:scale-105 hover:shadow-lg"
+              className="px-8 py-4 rounded-full font-bold text-lg text-primary-foreground transition-all duration-300 hover:scale-110 hover:shadow-[0_0_30px_rgba(255,0,0,0.6)] pulse-glow"
               style={{ background: "var(--gradient-primary)" }}
             >
               Watch Live
             </a>
             <a
               href="#shows"
-              className="px-8 py-3 rounded-full font-semibold glass-card text-foreground hover:border-primary/50 transition-all duration-300"
+              className="px-8 py-4 rounded-full font-bold text-lg glass-card text-foreground hover:border-primary transition-all duration-300 hover:bg-white/10"
             >
               Our Shows
             </a>
-          </div>
+          </motion.div>
           {/* Scroll indicator */}
           <div className="absolute bottom-8 animate-bounce">
             <ChevronDown className="text-primary" size={32} />
@@ -90,39 +134,59 @@ const HomePage = () => {
       {/* Breaking news ticker */}
       <BreakingNewsTicker />
 
+      {/* Latest News (magazine grid) */}
+      <AnimatedSection>
+        <LatestNewsGrid />
+      </AnimatedSection>
+      
       {/* Stats */}
-      <StatsSection />
+      <AnimatedSection delay={0.1}>
+        <StatsSection />
+      </AnimatedSection>
 
       {/* Live TV */}
-      <div id="live">
-        <LiveTVSection />
-      </div>
-
-      {/* Latest News (magazine grid) */}
-      <LatestNewsGrid />
+      <AnimatedSection>
+        <div id="live">
+          <LiveTVSection />
+        </div>
+      </AnimatedSection>
 
       {/* Artists Showcase */}
-      <ArtistsShowcase />
+      <AnimatedSection>
+        <ArtistsShowcase />
+      </AnimatedSection>
 
       {/* Featured Shows */}
-      <div id="shows">
-        <FeaturedShowsSection />
-      </div>
+      <AnimatedSection>
+        <div id="shows">
+          <FeaturedShowsSection />
+        </div>
+      </AnimatedSection>
 
       {/* Our Brands / Family */}
-      <OurBrandsSection />
+      <AnimatedSection>
+        <OurBrandsSection />
+      </AnimatedSection>
 
       {/* Upcoming events */}
-      <UpcomingEventsSection />
+      <AnimatedSection>
+        <UpcomingEventsSection />
+      </AnimatedSection>
 
       {/* Clients */}
-      <ClientsSection />
+      <AnimatedSection>
+        <ClientsSection />
+      </AnimatedSection>
 
       {/* Testimonials */}
-      <TestimonialsSection />
+      <AnimatedSection>
+        <TestimonialsSection />
+      </AnimatedSection>
 
       {/* Newsletter CTA */}
-      <NewsletterSection />
+      <AnimatedSection>
+        <NewsletterSection />
+      </AnimatedSection>
 
       {/* Brand Logos */}
       <section ref={brandsRef} className="py-20" style={{ background: "var(--gradient-dark)" }}>

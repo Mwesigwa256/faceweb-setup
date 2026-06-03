@@ -1,4 +1,5 @@
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { motion } from "framer-motion";
 
 const ArtistsShowcase = () => {
   const { ref, isVisible } = useScrollReveal();
@@ -29,18 +30,33 @@ const ArtistsShowcase = () => {
           video directors, record labels and producers.
         </p>
         <div className="flex flex-wrap justify-center gap-4">
-          <div className="glass-card px-6 py-3 pulse-glow">
-            <p className="text-2xl font-heading text-primary">24hrs</p>
-            <p className="text-xs text-muted-foreground">Local Content</p>
-          </div>
-          <div className="glass-card px-6 py-3">
-            <p className="text-2xl font-heading text-primary">100%</p>
-            <p className="text-xs text-muted-foreground">Ugandan Music</p>
-          </div>
-          <div className="glass-card px-6 py-3">
-            <p className="text-2xl font-heading text-primary">32+</p>
-            <p className="text-xs text-muted-foreground">Countries</p>
-          </div>
+          <motion.div 
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.1, type: "spring", stiffness: 100 }}
+            className="glass-card px-8 py-4 pulse-glow hover:scale-110 transition-transform cursor-pointer"
+          >
+            <p className="text-3xl font-heading text-primary drop-shadow-md">24hrs</p>
+            <p className="text-xs text-white font-bold uppercase tracking-wider mt-1">Local Content</p>
+          </motion.div>
+          <motion.div 
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, type: "spring", stiffness: 100 }}
+            className="glass-card px-8 py-4 hover:scale-110 transition-transform cursor-pointer border-primary/30 hover:border-primary"
+          >
+            <p className="text-3xl font-heading text-primary drop-shadow-md">100%</p>
+            <p className="text-xs text-white font-bold uppercase tracking-wider mt-1">Ugandan Music</p>
+          </motion.div>
+          <motion.div 
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.5, type: "spring", stiffness: 100 }}
+            className="glass-card px-8 py-4 hover:scale-110 transition-transform cursor-pointer border-primary/30 hover:border-primary"
+          >
+            <p className="text-3xl font-heading text-primary drop-shadow-md">32+</p>
+            <p className="text-xs text-white font-bold uppercase tracking-wider mt-1">Countries</p>
+          </motion.div>
         </div>
       </div>
     </section>

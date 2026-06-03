@@ -1,6 +1,7 @@
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Radio, Tv } from "lucide-react";
 import { assets } from "@/lib/assets";
+import Equalizer from "@/components/Equalizer";
 
 const LiveTVSection = () => {
   const { ref, isVisible } = useScrollReveal();
@@ -35,9 +36,9 @@ const LiveTVSection = () => {
               >
                 <source src={assets.faceHome} type="video/mp4" />
               </video>
-              <div className="absolute top-4 left-4 flex items-center gap-2 bg-primary/90 px-3 py-1 rounded-full">
-                <span className="w-2 h-2 bg-primary-foreground rounded-full animate-pulse" />
-                <span className="text-xs font-semibold text-primary-foreground uppercase tracking-wider">Live</span>
+              <div className="absolute top-4 left-4 flex items-center gap-3 bg-primary/90 px-4 py-1.5 rounded-full shadow-lg">
+                <Equalizer />
+                <span className="text-sm font-bold text-primary-foreground uppercase tracking-widest drop-shadow-md">Live</span>
               </div>
               <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-background/90 to-transparent p-6">
                 <div className="flex items-center gap-3">
