@@ -108,20 +108,28 @@ const HomePage = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.2, duration: 0.8 }}
-            className="mt-10 flex gap-6"
+            className="mt-10 md:flex  gap-3 md:gap-6"
           >
             <a
               href="#live"
-              className="px-8 py-4 rounded-full font-bold text-lg text-primary-foreground transition-all duration-300 hover:scale-110 hover:shadow-[0_0_30px_rgba(255,0,0,0.6)] pulse-glow"
+              className="block px-4 py-3 md:px-8 md:py-4 rounded-full font-bold text-lg text-primary-foreground transition-all duration-300 hover:scale-110 hover:shadow-[0_0_30px_rgba(255,0,0,0.6)] pulse-glow"
               style={{ background: "var(--gradient-primary)" }}
             >
               Watch Live
             </a>
             <a
               href="#shows"
-              className="px-8 py-4 rounded-full font-bold text-lg glass-card text-foreground hover:border-primary transition-all duration-300 hover:bg-white/10"
+              className="hidden md:block md:px-8 md:py-4 rounded-full font-bold text-lg glass-card text-foreground hover:border-primary transition-all duration-300 hover:bg-white/10"
             >
               Our Shows
+            </a>
+
+            <br className="md:hidden" />
+            <a
+              href="/submit-music"
+              className="block  md:hidden px-4 py-3 md:px-8 md:py-4 rounded-full font-bold text-lg glass-card text-foreground hover:border-primary transition-all duration-300 hover:bg-white/10"
+            >
+              Upload Music
             </a>
           </motion.div>
           {/* Scroll indicator */}
