@@ -16,6 +16,7 @@ import { ChevronDown } from "lucide-react";
 import SEO from "@/components/SEO";
 import { motion } from "framer-motion";
 import AnimatedSection from "@/components/AnimatedSection";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
   const { ref: brandsRef, isVisible: brandsVisible } = useScrollReveal();
@@ -125,12 +126,12 @@ const HomePage = () => {
             </a>
 
             <br className="md:hidden" />
-            <a
-              href="/submit-music"
-              className="block  md:hidden px-4 py-3 md:px-8 md:py-4 rounded-full font-bold text-lg glass-card text-foreground hover:border-primary transition-all duration-300 hover:bg-white/10"
-            >
+              <Link
+                to="/submit-music"
+                className="block  md:hidden px-4 py-3 md:px-8 md:py-4 rounded-full font-bold text-lg glass-card text-foreground hover:border-primary transition-all duration-300 hover:bg-white/10"
+              >
               Upload Music
-            </a>
+            </Link>
           </motion.div>
           {/* Scroll indicator */}
           <div className="absolute bottom-8 animate-bounce">
