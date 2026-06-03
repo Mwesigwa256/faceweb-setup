@@ -32,7 +32,10 @@ const SubmitMusicPage = () => {
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden">
           <div className="bg-gradient-to-r from-red-600 to-red-800 px-8 py-10 text-white">
-            <h1 className="text-3xl font-bold mb-2">Face TV Video Submission Form</h1>
+            <h1 className="text-3xl font-bold mb-2">Face TV Video Submission Form and Payments</h1>
+            <p className="text-red-100">
+              Face Tv uploads are for artists only.
+            </p>
             <p className="text-red-100">
               Please fill in all details below and submit the completed form with the video and lyrics.
             </p>
@@ -41,7 +44,10 @@ const SubmitMusicPage = () => {
           <div className="p-8">
             <div className="bg-red-50 dark:bg-red-900/20 border-l-4 border-red-500 p-4 mb-8 text-sm text-red-800 dark:text-red-200">
               <p className="font-semibold mb-1">NOTE:</p>
-              <p>NO VIDEOS WILL BE CONSIDERED FOR ACQUISITION OR PLAYLIST MEETINGS WITHOUT A FULLY COMPLETED SUBMISSION FORM AND ACCOMPANYING LYRICS. IF ACCEPTED, THIS MUSIC VIDEO'S ON-SCREEN CLIP TITLE WILL APPEAR AS ENTERED ON THIS FORM INCLUDING CAPITALISATION, ABBREVIATIONS AND PUNCTUATION. PLEASE ENSURE YOUR INFORMATION IS ENTERED ACCURATELY!</p>
+              <p>NO VIDEOS WILL BE CONSIDERED FOR ACQUISITION OR PLAYLIST MEETINGS WITHOUT A FULLY COMPLETED SUBMISSION FORM AND PAYMENTS. 
+                IF ACCEPTED, THIS MUSIC VIDEO'S ON-SCREEN CLIP TITLE WILL APPEAR AS ENTERED ON THIS FORM INCLUDING CAPITALISATION, ABBREVIATIONS AND PUNCTUATION. 
+                
+                PLEASE ENSURE YOUR INFORMATION IS ENTERED ACCURATELY!</p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-8">
@@ -212,7 +218,28 @@ const SubmitMusicPage = () => {
                     This form is governed by the law of Uganda and the parties hereby submit to the exclusive jurisdiction of the Uganda Courts, UPRS and UCC at large.
                   </p>
                 </div>
+
+                <div className="flex items-start space-x-3 pt-4 border-t dark:border-gray-800">
+                  <Checkbox 
+                    id="terms" 
+                    checked={agreed}
+                    onCheckedChange={(checked) => setAgreed(checked as boolean)}
+                    className="mt-1"
+                  />
+                  <div className="grid gap-1.5 leading-none">
+                    <label
+                      htmlFor="terms"
+                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
+                    >
+                      I understand that submitting this form does not complete the submission process.
+                      I acknowledge that applicable fees may be required,and I agree to be contacted by 
+                      FceTv Management regarding payment detais and further processing of my submission.
+                    </label>
+                  </div>
+                </div>
                 
+
+
                 <div className="flex items-start space-x-3 pt-4 border-t dark:border-gray-800">
                   <Checkbox 
                     id="terms" 
