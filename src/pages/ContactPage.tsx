@@ -87,8 +87,9 @@ const ContactPage = () => {
                 <MapPin className="text-primary mt-1 shrink-0" size={22} />
                 <div>
                   <p className="text-sm text-muted-foreground">Address</p>
-                  <p className="text-foreground">Plot 301, Kira Road, Bukoto</p>
-                  <p className="text-foreground text-sm">P.O Box 15125, Kampala, Uganda</p>
+                  <p className="text-foreground">Plot 914 Kaduyu Road, Kiwatule</p>
+                  <p className="text-foreground text-sm">Kampala, Uganda</p>
+                  <p className="text-foreground text-xs text-muted-foreground mt-1">0.35970° N, 32.62719° E</p>
                 </div>
               </div>
               <a
@@ -107,7 +108,7 @@ const ContactPage = () => {
                 <Mail className="text-primary mt-1 shrink-0" size={22} />
                 <div>
                   <p className="text-sm text-muted-foreground">Email</p>
-                  <p className="text-foreground">facetvonlineug@gmail.com</p>
+                  <p className="text-foreground">mwesigwasophie12@gmail.com</p>
                 </div>
               </div>
               <div className="glass-card p-6 flex items-start gap-4">
@@ -123,7 +124,7 @@ const ContactPage = () => {
               <div className="glass-card overflow-hidden rounded-lg">
                 <iframe
                   title="Face TV Location"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.7573!2d32.5854!3d0.3476!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sBukoto%2C%20Kampala!5e0!3m2!1sen!2sug!4v1600000000000"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.74!2d32.62719!3d0.35970!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x19d8e5c1234567!2sPlot%20914%20Kaduyu%20Road%20Kiwatule%20Kampala!5e0!3m2!1sen!2sug!4v1687000000000"
                   width="100%"
                   height="200"
                   style={{ border: 0 }}

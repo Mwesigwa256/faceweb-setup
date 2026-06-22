@@ -50,7 +50,7 @@ const Footer = () => {
           <div className="space-y-3 text-sm">
             <div className="flex items-start gap-2 text-muted-foreground">
               <MapPin size={16} className="text-primary mt-0.5 shrink-0" />
-              <span>Plot 301, Kira Road, Bukoto<br />P.O Box 15125, Kampala, Uganda</span>
+              <span>Plot 914 Kaduyu Road, Kiwatule<br />Kampala, Uganda</span>
             </div>
             <a
               href="https://wa.me/256748624400"
@@ -63,7 +63,7 @@ const Footer = () => {
             </a>
             <div className="flex items-center gap-2 text-muted-foreground">
               <Mail size={16} className="text-primary shrink-0" />
-              <span>facetvonlineug@gmail.com</span>
+              <span>mwesigwasophie12@gmail.com</span>
             </div>
           </div>
           <div className="mt-4 flex gap-3 text-muted-foreground text-xs">
