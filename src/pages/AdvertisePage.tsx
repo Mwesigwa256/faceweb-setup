@@ -166,7 +166,7 @@ const AdvertisePage = () => {
                   <Mail className="text-primary shrink-0 mt-0.5" size={20} />
                   <div>
                     <div className="text-[10px] text-muted-foreground font-semibold uppercase tracking-wider">Email Us</div>
-                    <div className="text-foreground font-medium text-xs break-all">facetvonlineug@gmail.com</div>
+                    <div className="text-foreground font-medium text-xs break-all">mwesigwasophie12@gmail.com</div>
                   </div>
                 </div>
                 
@@ -187,7 +187,7 @@ const AdvertisePage = () => {
                   <MapPin className="text-primary shrink-0 mt-0.5" size={20} />
                   <div>
                     <div className="text-[10px] text-muted-foreground font-semibold uppercase tracking-wider">Our Offices</div>
-                    <div className="text-foreground font-medium text-xs">Plot 301, Kira Rd, Bukoto</div>
+                    <div className="text-foreground font-medium text-xs">Plot 914 Kaduyu Road Kiwatule.</div>
                   </div>
                 </div>
               </div>
