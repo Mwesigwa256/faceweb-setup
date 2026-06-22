@@ -87,8 +87,8 @@ const ContactPage = () => {
                 <MapPin className="text-primary mt-1 shrink-0" size={22} />
                 <div>
                   <p className="text-sm text-muted-foreground">Address</p>
-                  <p className="text-foreground">Plot 301, Kira Road, Bukoto</p>
-                  <p className="text-foreground text-sm">P.O Box 15125, Kampala, Uganda</p>
+                  <p className="text-foreground">Plot 914 Kaduyu Road Kiwatule.</p>
+                  {/* <p className="text-foreground text-sm">P.O Box 15125, Kampala, Uganda</p> */}
                 </div>
               </div>
               <a
@@ -107,7 +107,7 @@ const ContactPage = () => {
                 <Mail className="text-primary mt-1 shrink-0" size={22} />
                 <div>
                   <p className="text-sm text-muted-foreground">Email</p>
-                  <p className="text-foreground">facetvonlineug@gmail.com</p>
+                  <p className="text-foreground">mwesigwasophie12@gmail.com</p>
                 </div>
               </div>
               <div className="glass-card p-6 flex items-start gap-4">
