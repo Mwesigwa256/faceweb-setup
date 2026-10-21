@@ -7,8 +7,8 @@ import MainLayout from "@/layouts/MainLayout";
 import HomePage from "@/pages/HomePage";
 import AboutPage from "@/pages/AboutPage";
 import ShowsPage from "@/pages/ShowsPage";
-import NewsPage from "@/pages/NewsPage";
-import NewsDetailPage from "@/pages/NewsDetailPage";
+
+
 import SchedulePage from "@/pages/SchedulePage";
 import AdvertisePage from "@/pages/AdvertisePage";
 import ContactPage from "@/pages/ContactPage";
@@ -29,8 +29,8 @@ const App = () => (
             <Route path="/" element={<HomePage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/shows" element={<ShowsPage />} />
-            <Route path="/news" element={<NewsPage />} />
-            <Route path="/news/:slug" element={<NewsDetailPage />} />
+            
+            
             <Route path="/schedule" element={<SchedulePage />} />
             <Route path="/advertise" element={<AdvertisePage />} />
             <Route path="/contact" element={<ContactPage />} />

@@ -35,7 +35,7 @@ const AdvertisePage = () => {
             Advertise <span className="text-primary">With Us</span>
           </h1>
           <p className="text-muted-foreground mt-4 max-w-2xl mx-auto text-lg leading-relaxed">
-            Reach over <span className="text-foreground font-semibold">470,000 daily viewers</span> across 32+ African countries on StarTimes CH 223 / ST 199.
+            Reach over <span className="text-foreground font-semibold">470,000 daily viewers</span> across 32+ African countries on StarTimes CH 223 / DTT/Satellite Dish CH 528.
           </p>
         </div>
       </section>
@@ -88,7 +88,7 @@ const AdvertisePage = () => {
       </AnimatedSection>
 
       {/* Rate Card Section */}
-      <AnimatedSection className="py-24 border-t border-border/40" style={{ background: "var(--gradient-dark)" }}>
+      <AnimatedSection className="py-24 border-t border-border/40 bg-[image:var(--gradient-dark)]">
         <div className="section-container">
           <div className="text-center max-w-2xl mx-auto mb-16">
             <h2 className="text-3xl md:text-5xl font-heading text-foreground">

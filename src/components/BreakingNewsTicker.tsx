@@ -1,11 +1,11 @@
 import { Radio } from "lucide-react";
 
 const items = [
-  "Press Play tops Uganda's #1 music chart this week",
+  "Press Play tops Uganda's music ",
   "Face TV now broadcasting in 32+ African countries",
-  "Club Bangerz Live this Saturday — featuring DJ Slick Stuart",
-  "New show 'Backyard' premieres Friday at 8 PM",
-  "Face TV partners with StarTimes — now on CH 223 / ST 199",
+  "Face TV Live Events ",
+  "The Spotlight",
+  "Face TV Awards",
 ];
 
 const BreakingNewsTicker = () => {

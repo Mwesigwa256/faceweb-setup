@@ -223,9 +223,11 @@ const ShowsPage = () => {
       </AnimatedSection>
 
       {/* EPG Banner */}
-      <AnimatedSection className="py-16 flex justify-center" style={{ background: "var(--gradient-dark)" }}>
-        <img src={assets.epg} alt="EPG" className="h-32 md:h-44 object-contain" />
-      </AnimatedSection>
+      <section className="py-16 flex justify-center" style={{ background: "var(--gradient-dark)" }}>
+        <AnimatedSection>
+          <img src={assets.epg} alt="EPG" className="h-32 md:h-44 object-contain" />
+        </AnimatedSection>
+      </section>
     </div>
   );
 };

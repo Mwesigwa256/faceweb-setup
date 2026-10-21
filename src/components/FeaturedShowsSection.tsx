@@ -7,8 +7,8 @@ import { assets } from "@/lib/assets";
 const shows = [
   { title: "Press Play", desc: "The best new Ugandan music videos, curated daily.", video: assets.pressPlay },
   { title: "The Spotlight", desc: "Daily entertainment news — trends, gossip, and exclusives.", video: assets.faceHits },
-  { title: "Backyard", desc: "Intimate celebrity conversations and lifestyle stories.", video: assets.riseUp },
-  { title: "Club Bangerz", desc: "Weekend party anthems and DJ sets all Saturday long.", video: assets.collabs },
+  { title: "Rise Up", desc: "Intimate celebrity conversations and lifestyle stories.", video: assets.riseUp },
+  { title: "102 Collaborations", desc: "Weekend party anthems and DJ sets all Saturday long.", video: assets.collabs },
 ];
 
 const FeaturedShowsSection = () => {

@@ -4,13 +4,13 @@ import { Quote } from "lucide-react";
 const testimonials = [
   {
     quote: "Face TV has been an incredible platform for our brand awareness campaigns. The reach across 32 African countries is unmatched for targeting the youth market.",
-    name: "Marketing Director",
-    company: "Coca-Cola Uganda",
+    name: "Comedian",
+  company: "Independent Comedian",
   },
   {
     quote: "Working with Face TV transformed our visibility. Their 470,000 daily viewers mean our ads get seen by the people who matter most to our business.",
-    name: "Brand Manager",
-    company: "MTN Uganda",
+    name: "Producer",
+    company: "Independent Producer",
   },
   {
     quote: "Face TV is the heartbeat of Ugandan music. As an artist, getting my videos played here means reaching every corner of Uganda and beyond.",

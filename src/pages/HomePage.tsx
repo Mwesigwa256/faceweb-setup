@@ -7,7 +7,7 @@ import ClientsSection from "@/components/ClientsSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import ArtistsShowcase from "@/components/ArtistsShowcase";
 import BreakingNewsTicker from "@/components/BreakingNewsTicker";
-import OurBrandsSection from "@/components/OurBrandsSection";
+// import OurBrandsSection from "@/components/OurBrandsSection";
 import LatestNewsGrid from "@/components/LatestNewsGrid";
 import UpcomingEventsSection from "@/components/UpcomingEventsSection";
 import NewsletterSection from "@/components/NewsletterSection";
@@ -102,7 +102,7 @@ const HomePage = () => {
             transition={{ delay: 1, duration: 1 }}
             className="text-sm md:text-base text-muted-foreground mt-3 font-medium bg-black/40 px-6 py-2 rounded-full border border-white/10 backdrop-blur-sm"
           >
-            StarTimes CH 223 / ST 199 — 24 Hours, 32+ African Countries
+            StarTimes CH 223 DTT/Satellite Dish CH 528- 24 Hours, 32+ African Countries
           </motion.p>
           
           <motion.div 
@@ -173,9 +173,9 @@ const HomePage = () => {
       </AnimatedSection>
 
       {/* Our Brands / Family */}
-      <AnimatedSection>
+      {/* <AnimatedSection>
         <OurBrandsSection />
-      </AnimatedSection>
+      </AnimatedSection> */}
 
       {/* Upcoming events */}
       <AnimatedSection>

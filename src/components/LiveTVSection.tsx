@@ -108,7 +108,7 @@ const LiveTVSection = () => {
           </h2>
         </div>
         <p className="text-muted-foreground text-center mb-10 max-w-lg mx-auto">
-          Tune in to Face TV — StarTimes CH 223 / ST 199. 24 hours of non-stop Ugandan music.
+          Tune in to Face TV — StarTimes CH 223 DTT/Satellite Dish CH 528- 24 hours of non-stop Ugandan music.
         </p>
 
         <div
@@ -124,7 +124,6 @@ const LiveTVSection = () => {
                 autoPlay
                 playsInline
                 controls
-                volume={1}
                 className="w-full h-full object-cover bg-black"
               />
               {error && (
@@ -134,7 +133,7 @@ const LiveTVSection = () => {
               )}
               <div className="absolute top-4 left-4 flex items-center gap-3 bg-primary/90 px-4 py-1.5 rounded-full shadow-lg">
                 <Equalizer />
-                <span className="text-sm font-bold text-primary-foreground uppercase tracking-widest drop-shadow-md">Live</span>
+                <span className="text-sm font-bold text-primary-foreground uppercase tracking-widest drop-shadow-md">live</span>
               </div>
               <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-background/90 to-transparent p-6">
                 <div className="flex items-center gap-3">

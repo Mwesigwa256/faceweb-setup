@@ -42,13 +42,13 @@ const AboutPage = () => {
 
       {/* Who We Are — Enhanced */}
       {/* Who We Are — Enhanced */}
-      <AnimatedSection className="py-20" style={{ background: "var(--gradient-dark)" }}>
+      <AnimatedSection className="py-20 bg-[image:var(--gradient-dark)]">
         <div className="section-container max-w-4xl">
           <h2 className="text-3xl md:text-4xl font-heading text-foreground mb-6">
             Who <span className="text-primary">We Are</span>
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-            FACE TV is a 24hr Ugandan music television channel aired on StarTimes cable network CH 223 / ST 199. The StarTimes platform has over 1.5 million decoders in circulation in Uganda, and over 14.5 million subscribers throughout Africa.
+            FACE TV is a 24hr Ugandan music television channel aired on StarTimes cable network CH 223 DDT/Satellite Dish CH 528. The StarTimes platform has over 1.5 million decoders in circulation in Uganda, and over 14.5 million subscribers throughout Africa.
           </p>
           <p className="text-lg text-muted-foreground leading-relaxed mb-6">
             There are over 470,000 decoders tuned in to FACE TV per day in Uganda alone. We own 35% viewership of StarTimes Pay TV and are the 4th most-watched local channel on the platform. Currently, FACE TV is aired across the East African region and in 32 other African Countries.
@@ -89,7 +89,7 @@ const AboutPage = () => {
 
       {/* Values */}
       {/* Values */}
-      <AnimatedSection className="py-20" style={{ background: "var(--gradient-dark)" }}>
+      <AnimatedSection className="py-20 bg-[image:var(--gradient-dark)]">
         <div className="section-container text-center">
           <Gem className="mx-auto mb-3 text-primary" size={28} />
           <h2 className="text-3xl md:text-4xl font-heading text-foreground mb-2">
@@ -138,7 +138,7 @@ const AboutPage = () => {
 
       {/* Reach */}
       {/* Reach */}
-      <AnimatedSection className="py-20" style={{ background: "var(--gradient-dark)" }}>
+      <AnimatedSection className="py-20 bg-[image:var(--gradient-dark)]">
         <div className="section-container max-w-4xl">
           <h2 className="text-3xl md:text-4xl font-heading text-foreground text-center mb-4">
             Our <span className="text-primary">Reach</span>
