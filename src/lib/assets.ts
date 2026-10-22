@@ -17,4 +17,5 @@ export const assets = {
   home: `${GITHUB_RAW}/Home.mp4`,
   show: `${GITHUB_RAW}/show.mp4`,
   nani: `${GITHUB_RAW}/Nani.mp4`,
+  imba: '${GITHUB_RAW}/Imba.mp4',
 };
