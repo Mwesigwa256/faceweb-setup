@@ -145,7 +145,7 @@ const HomePage = () => {
 
       {/* Latest News (magazine grid) */}
       <AnimatedSection>
-        <LatestNewsGrid />
+        <UpcomingEventsSection />
       </AnimatedSection>
       
       {/* Stats */}
@@ -172,15 +172,6 @@ const HomePage = () => {
         </div>
       </AnimatedSection>
 
-      {/* Our Brands / Family */}
-      {/* <AnimatedSection>
-        <OurBrandsSection />
-      </AnimatedSection> */}
-
-      {/* Upcoming events */}
-      <AnimatedSection>
-        <UpcomingEventsSection />
-      </AnimatedSection>
 
       {/* Clients */}
       <AnimatedSection>

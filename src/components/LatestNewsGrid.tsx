@@ -1,21 +1,20 @@
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Link } from "react-router-dom";
-import { Clock, ArrowRight } from "lucide-react";
+import { Clock} from "lucide-react";
 import { assets } from "@/lib/assets";
 
 const featured = {
-  title: "Press Play Crowned Uganda's Most-Watched Music Show",
-  excerpt: "Face TV's flagship countdown continues to dominate viewership ratings across East Africa with its bold lineup and electric energy.",
-  category: "Entertainment",
-  time: "2 hours ago",
+  title: "Face Tv announces its Top Music Awards coming soon",
+  // excerpt: "Face TV's flagship countdown continues to dominate viewership ratings across East Africa with its bold lineup and electric energy.",
+  // category: "Entertainment",
+  // time: "2 hours ago",
   image: assets.concert,
 };
 
 const articles = [
-  { title: "Bebe Cool Returns to the Stage in Massive Kampala Concert", category: "Music", time: "5h ago", image: assets.concert },
-  { title: "Inside the New Face Studios — A Behind-the-Scenes Look", category: "Inside Face TV", time: "1d ago", image: assets.hero },
-  { title: "Top 10 Ugandan Anthems Dominating the Charts This Month", category: "Charts", time: "2d ago", image: assets.concert },
-  { title: "Club Bangerz Goes Live: DJs Lighting Up Saturday Nights", category: "Events", time: "3d ago", image: assets.hero },
+  { title: "Face TV top watched channel now in Rwanda", category: "Music",image: assets.concert },
+  { title: "It can now be watched over East Africa .", category: "Inside Face TV",image: assets.hero },
+  
 ];
 
 const LatestNewsGrid = () => {
@@ -26,14 +25,13 @@ const LatestNewsGrid = () => {
       <div className="section-container">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
           <div>
-            <span className="text-xs uppercase tracking-[0.3em] text-primary font-semibold">Trending Now</span>
             <h2 className="text-3xl md:text-5xl font-heading text-foreground mt-2">
               Latest <span className="text-primary">Stories</span>
             </h2>
           </div>
-          <Link to="/news" className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:gap-3 transition-all">
+          {/* <Link to="/news" className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:gap-3 transition-all">
             View All News <ArrowRight size={16} />
-          </Link>
+          </Link> */}
         </div>
 
         <div className={`grid grid-cols-1 lg:grid-cols-2 gap-6 transition-all duration-700 ${isVisible ? "opacity-100" : "opacity-0"}`}>

@@ -13,7 +13,7 @@ const Footer = () => {
         <div>
           <img src={assets.logo} alt="Face TV" className="h-12 mb-4" loading="lazy" />
           <p className="text-sm text-muted-foreground leading-relaxed">
-            The Home of Ugandan Music. Broadcasting 24/7 on StarTimes CH 223 across 32+ African countries.
+            The Home of Ugandan Music. Broadcasting 24/7 on StarTimes CH 223 DTT/Satellite Dish CH 528- across 32+ African countries.
           </p>
         </div>
         <div>
@@ -27,7 +27,7 @@ const Footer = () => {
               { label: "Schedule", path: "/schedule" },
               { label: "Advertise", path: "/advertise" },
               { label: "Contact", path: "/contact" },
-              { label: "Install App", path: "/install" },
+              // { label: "Install App", path: "/install" },
             ].map((link) => (
               <Link key={link.path} to={link.path} className="nav-link text-sm">{link.label}</Link>
             ))}
@@ -39,7 +39,7 @@ const Footer = () => {
             <span>Press Play</span>
             <span>The Spotlight</span>
             <span>Backyard</span>
-            <span>Club Bangerz</span>
+            <span>102 Collaborations</span>
             <span>DJ Mix</span>
             <span>Kikadde</span>
             <span>Freshers</span>

@@ -31,14 +31,14 @@ const shows: Show[] = [
     time: "Mon–Fri, 6–7PM",
   },
   {
-    title: "Backyard",
+    title: "Rise Up",
     description: "Intimate celebrity conversations and lifestyle stories. Get up close and personal with Uganda's biggest stars in relaxed settings.",
     video: assets.riseUp,
     category: "Lifestyle",
     time: "Fri & Sun, Select Times",
   },
   {
-    title: "Club Bangerz",
+    title: "102 Collaborations",
     description: "Weekend party anthems and DJ sets all Saturday long. The ultimate soundtrack for your weekend vibes.",
     video: assets.collabs,
     category: "Party",
@@ -59,7 +59,7 @@ const shows: Show[] = [
     time: "Thursday, 12–6PM & 8PM–10AM",
   },
   {
-    title: "Freshers",
+    title: "Imba Sessions",
     description: "Discover new and upcoming Ugandan artists. First look at fresh talent breaking into the music scene.",
     video: assets.show,
     category: "Entertainment",
@@ -190,6 +190,7 @@ const ShowsPage = () => {
                     </div>
                   )}
                   {/* Category badge */}
+
                   <div className="absolute top-3 left-3">
                     <span
                       className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-primary-foreground"
