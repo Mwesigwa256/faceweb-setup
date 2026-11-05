@@ -61,7 +61,7 @@ const shows: Show[] = [
   {
     title: "Imba Sessions",
     description: "Discover new and upcoming Ugandan artists. First look at fresh talent breaking into the music scene.",
-    video: assets.show,
+    video: assets.imba,
     category: "Entertainment",
     time: "Mon–Fri, 3–4PM",
   },

@@ -1,5 +1,5 @@
 // Asset URLs from the GitHub repository
-const GITHUB_RAW = "https://raw.githubusercontent.com/andyshoots185/FaceWeb/main/src/assets";
+const GITHUB_RAW = "/assets";
 
 export const assets = {
   logo: `${GITHUB_RAW}/logo.png`,
@@ -17,5 +17,5 @@ export const assets = {
   home: `${GITHUB_RAW}/Home.mp4`,
   show: `${GITHUB_RAW}/show.mp4`,
   nani: `${GITHUB_RAW}/Nani.mp4`,
-  imba: '${GITHUB_RAW}/Imba.mp4',
+  imba: `${GITHUB_RAW}/Imba.mp4`,
 };
