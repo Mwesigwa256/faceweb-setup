@@ -1,11 +1,9 @@
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const socials = [
-  { name: "YouTube", url: "https://youtube.com/@facetvuganda", icon: "▶", color: "hover:text-red-500" },
-  { name: "Instagram", url: "https://instagram.com/facetvuganda", icon: "◎", color: "hover:text-pink-500" },
-  { name: "TikTok", url: "https://tiktok.com/@facetvuganda", icon: "♪", color: "hover:text-foreground" },
-  { name: "Twitter/X", url: "https://x.com/facetvuganda", icon: "𝕏", color: "hover:text-foreground" },
-  { name: "Facebook", url: "https://facebook.com/facetvuganda", icon: "f", color: "hover:text-blue-500" },
+  { name: "YouTube", url: "http://www.youtube.com/@FACETVUG", icon: "▶", color: "hover:text-red-500" },
+  { name: "TikTok", url: "https://www.tiktok.com/@facetvuganda?is_from_webapp=1&sender_device=pc", icon: "♪", color: "hover:text-foreground" },
+  { name: "Facebook", url: "https://www.facebook.com/profile.php?id=61595297924610", icon: "f", color: "hover:text-blue-500" },
 ];
 
 const SocialSection = () => {
@@ -18,7 +16,6 @@ const SocialSection = () => {
           Follow <span className="text-primary">@facetvuganda</span>
         </h2>
         <p className="text-muted-foreground mb-10">Stay connected across all platforms</p>
-
         <div
           className={`flex flex-wrap items-center justify-center gap-6 transition-all duration-700 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
