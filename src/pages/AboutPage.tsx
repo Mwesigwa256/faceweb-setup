@@ -1,5 +1,5 @@
 import { assets } from "@/lib/assets";
-import { Target, Eye, Gem, Award } from "lucide-react";
+import { Target, Eye, Gem, Award, Calendar } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
 
 const values = [
@@ -27,26 +27,16 @@ const AboutPage = () => {
   return (
     <div>
       {/* Hero — KEPT */}
-      <section
-        className="relative h-[60vh] bg-cover bg-center flex items-center"
-        style={{ backgroundImage: `url(${assets.concert})` }}
-      >
-        <div className="absolute inset-0" style={{ background: "var(--hero-overlay)" }} />
-        <div className="relative z-10 section-container">
-          <p className="text-accent text-lg italic mb-2">The Home of Ugandan Music</p>
-          <h1 className="text-5xl md:text-7xl font-heading text-foreground">
-            About <span className="text-primary">Face TV</span>
-          </h1>
-        </div>
-      </section>
-
-      {/* Who We Are — Enhanced */}
-      {/* Who We Are — Enhanced */}
-      <AnimatedSection className="py-20 bg-[image:var(--gradient-dark)]">
-        <div className="section-container max-w-4xl">
-          <h2 className="text-3xl md:text-4xl font-heading text-foreground mb-6">
+  
+      <AnimatedSection className="py-28 bg-[image:var(--gradient-dark)] mb-20">
+        <div className=" section-container max-w-2xl mb-40">
+           <Calendar className="mx-auto mb-10 text-primary" size={36} /> 
+              <h1 className="text-5xl md:text-7xl font-heading text-foreground mb-6 text-center">
+                 Who<span className="text-primary">We Are</span>
+              </h1>
+          {/* <h2 className="text-5xl md:text-7xl text-center font-heading text-foreground mb-6">
             Who <span className="text-primary">We Are</span>
-          </h2>
+          </h2> */}
           <p className="text-lg text-muted-foreground leading-relaxed mb-6">
             FACE TV is a 24hr Ugandan music television channel aired on StarTimes cable network CH 223 DDT/Satellite Dish CH 528. The StarTimes platform has over 1.5 million decoders in circulation in Uganda, and over 14.5 million subscribers throughout Africa.
           </p>
@@ -58,7 +48,6 @@ const AboutPage = () => {
           </p>
         </div>
       </AnimatedSection>
-
       {/* Vision & Mission */}
       {/* Vision & Mission */}
       <AnimatedSection className="py-20 bg-background">
@@ -133,32 +122,6 @@ const AboutPage = () => {
               </div>
             ))}
           </div>
-        </div>
-      </AnimatedSection>
-
-      {/* Reach */}
-      {/* Reach */}
-      <AnimatedSection className="py-20 bg-[image:var(--gradient-dark)]">
-        <div className="section-container max-w-4xl">
-          <h2 className="text-3xl md:text-4xl font-heading text-foreground text-center mb-4">
-            Our <span className="text-primary">Reach</span>
-          </h2>
-          <p className="text-muted-foreground text-center mb-10">
-            Top towns with highest Face TV viewership in Uganda
-          </p>
-          <div className="flex flex-wrap justify-center gap-3">
-            {topTowns.map((town) => (
-              <span
-                key={town}
-                className="px-4 py-2 glass-card text-sm text-foreground hover:border-primary/50 transition-colors"
-              >
-                {town}
-              </span>
-            ))}
-          </div>
-          <p className="text-center text-muted-foreground mt-6 text-sm">
-            Target audience: 15–45 years • Young urban youth • Small businesses • Universities • Freelancers
-          </p>
         </div>
       </AnimatedSection>
     </div>

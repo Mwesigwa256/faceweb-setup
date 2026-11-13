@@ -6,15 +6,12 @@ type DaySchedule = { time: string; show: string }[];
 
 const schedule: Record<string, DaySchedule> = {
   Monday: [
-    { time: "10–11 AM", show: "DJ Mix" },
     { time: "11 AM–12 PM", show: "Spotlight Repeat" },
     { time: "12–2 PM", show: "Request Time" },
     { time: "2–3 PM", show: "Sing Along" },
     { time: "3–4 PM", show: "Freshers" },
-    { time: "4–6 PM", show: "Press Play" },
-    { time: "6–7 PM", show: "Spotlight" },
-    { time: "7–8 PM", show: "DJ Mix" },
-    { time: "8 PM–10 AM", show: "Press Play" },
+    { time: "5–6 PM", show: "Spotlight" },
+    { time: "7–9 AM", show: "Press Play" },
   ],
   Tuesday: [
     { time: "10–11 AM", show: "DJ Mix" },

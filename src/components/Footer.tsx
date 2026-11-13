@@ -37,12 +37,11 @@ const Footer = () => {
           <h3 className="text-xl font-heading text-primary mb-4">Our Shows</h3>
           <div className="flex flex-col gap-2 text-sm text-muted-foreground">
             <span>Press Play</span>
-            <span>The Spotlight</span>
-            <span>Backyard</span>
+            <span>The Face Hits</span>
             <span>102 Collaborations</span>
-            <span>DJ Mix</span>
-            <span>Kikadde</span>
-            <span>Freshers</span>
+            <span>SpotLight</span>
+            <span>Imba Sessions</span>
+            <span>Rise Up</span>
           </div>
         </div>
         <div>

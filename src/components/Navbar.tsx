@@ -6,7 +6,7 @@ import { useTheme } from "@/hooks/useTheme";
 
 const navLinks = [
   { label: "Home", path: "/" },
-  { label: "About", path: "/about" },
+  { label: "About Us", path: "/about" },
   { label: "Shows", path: "/shows" },
  
   { label: "Schedule", path: "/schedule" },

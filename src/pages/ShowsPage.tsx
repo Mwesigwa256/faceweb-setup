@@ -21,57 +21,45 @@ const shows: Show[] = [
     description: "The best new Ugandan music videos, curated and played daily. Catch the latest hits from top and emerging artists across all genres.",
     video: assets.pressPlay,
     category: "Music",
-    time: "Mon–Sun, 4–6PM & 8PM–10AM",
+    time: "Mon–Fri, 7–9AM",
   },
   {
-    title: "The Spotlight",
+    title: "The Face Hits",
     description: "Daily entertainment news covering trends, gossip, celebrity interviews and exclusives from Uganda's vibrant entertainment scene.",
     video: assets.faceHits,
     category: "Entertainment",
-    time: "Mon–Fri, 6–7PM",
+    time: "Mon–Fri, 9–11AM",
   },
   {
     title: "Rise Up",
     description: "Intimate celebrity conversations and lifestyle stories. Get up close and personal with Uganda's biggest stars in relaxed settings.",
     video: assets.riseUp,
     category: "Lifestyle",
-    time: "Fri & Sun, Select Times",
+    time: "Mon-Fri, 6-7AM",
   },
   {
     title: "102 Collaborations",
     description: "Weekend party anthems and DJ sets all Saturday long. The ultimate soundtrack for your weekend vibes.",
     video: assets.collabs,
     category: "Party",
-    time: "Saturday, 2–7PM",
+    time: "Mon-Fri, 11–12PM",
   },
   {
-    title: "DJ Mix",
+    title: "SpotLight",
     description: "Non-stop DJ mixes featuring the best of Ugandan and East African music. Perfect for starting your day with energy.",
     video: assets.faceHome,
     category: "Music",
-    time: "Daily, 10–11AM & 7–8PM",
+    time: "Mon-Fri, 5–6PM",
   },
-  {
-    title: "Kikadde",
-    description: "Throwback Thursday classics — relive the golden era of Ugandan music with timeless hits from legendary artists.",
-    video: assets.nani,
-    category: "Music",
-    time: "Thursday, 12–6PM & 8PM–10AM",
-  },
+
   {
     title: "Imba Sessions",
     description: "Discover new and upcoming Ugandan artists. First look at fresh talent breaking into the music scene.",
     video: assets.imba,
     category: "Entertainment",
-    time: "Mon–Fri, 3–4PM",
+    time: "Mon–Fri",
   },
-  {
-    title: "Request Time",
-    description: "You choose the music! Call in or text your requests and watch your favourite videos play live on air.",
-    video: assets.home,
-    category: "Music",
-    time: "Mon–Sat, 12–2PM",
-  },
+  
 ];
 
 const categories: Category[] = ["All", "Music", "Entertainment", "Lifestyle", "Party"];
