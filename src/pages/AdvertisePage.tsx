@@ -3,26 +3,49 @@ import { NavLink as Link } from "@/components/NavLink";
 import AnimatedSection from "@/components/AnimatedSection";
 import { motion } from "framer-motion";
 
-const spotAds = [
-  { segment: "Early Prime", time: "7:00am – 12:00pm", s15: "70,000", s30: "120,000", s45: "250,000", s60: "250,000" },
-  { segment: "Face Prime", time: "12:00pm – 5:00pm", s15: "190,000", s30: "300,000", s45: "400,000", s60: "500,000" },
-  { segment: "Peak", time: "5:00pm – 8:00pm", s15: "150,000", s30: "200,000", s45: "300,000", s60: "400,000" },
-  { segment: "Peak Plus", time: "8:00pm – 12:00am", s15: "140,000", s30: "180,000", s45: "200,000", s60: "300,000" },
-  { segment: "Late Night", time: "12:00am – 7:00am", s15: "65,000", s30: "100,000", s45: "150,000", s60: "200,000" },
+
+const rateCards = [
+  {
+    title: "SPOT ADVERTS",
+    durations: ["15 SEC", "30 SEC", "60 SEC"],
+    rows: [
+      { time: "8:00AM - 4:00PM", prices: ["50,000", "100,000", "200,000"] },
+      { time: "5:00PM - 7:00PM", prices: ["100,000", "180,000", "250,000"] },
+      { time: "8:00PM - 11:00PM", prices: ["200,000", "250,000", "300,000"] },
+      { time: "12:00PM - 7:00PM", prices: ["60,000", "80,000", "150,000"] },
+    ],
+  },
+  {
+    title: "SQUEEZE BACKS",
+    durations: ["15 SEC", "30 SEC"],
+    rows: [
+      { time: "8:00AM - 4:00PM", prices: ["70,000", "100,000"] },
+      { time: "5:00PM - 7:00PM", prices: ["100,000", "150,000"] },
+      { time: "8:00PM - 11:00PM", prices: ["120,000", "150,000"] },
+    ],
+  },
+  {
+    title: "POP UP ADVERTS (SMALL BANNER/LOGO)",
+    durations: ["15 SEC", "30 SEC"],
+    rows: [
+      { time: "8:00AM - 4:00PM", prices: ["35,000", "50,000"] },
+      { time: "5:00PM - 7:00PM", prices: ["60,000", "80,000"] },
+      { time: "8:00PM - 11:00PM", prices: ["80,000", "100,000"] },
+    ],
+  },
+  {
+    title: "POP UP ADVERTS (SMALL BANNER/LOGO)",
+    durations: ["15 SEC", "30 SEC"],
+    rows: [
+      { time: "8:00AM - 4:00PM", prices: ["45,000", "70,000"] },
+      { time: "5:00PM - 7:00PM", prices: ["80,000", "100,000"] },
+      { time: "8:00PM - 11:00PM", prices: ["120,000", "150,000"] },
+    ],
+  },
 ];
 
-const AdvertisePage = () => {
 
-  const getSegmentIcon = (segment: string) => {
-    switch (segment) {
-      case "Early Prime": return <Sun className="text-amber-500" size={18} />;
-      case "Face Prime": return <Sparkles className="text-primary" size={18} />;
-      case "Peak": return <TrendingUp className="text-emerald-500" size={18} />;
-      case "Peak Plus": return <Flame className="text-orange-500" size={18} />;
-      case "Late Night": return <Moon className="text-violet-500" size={18} />;
-      default: return <Megaphone size={18} />;
-    }
-  };
+const AdvertisePage = () => {
 
   return (
     <div>
@@ -88,49 +111,85 @@ const AdvertisePage = () => {
       </AnimatedSection>
 
       {/* Rate Card Section */}
-      <AnimatedSection className="py-24 border-t border-border/40 bg-[image:var(--gradient-dark)]">
-        <div className="section-container">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-5xl font-heading text-foreground">
-              Spot Ad <span className="text-primary">Rate Card</span>
-            </h2>
-            <div className="w-16 h-1 mt-3 bg-primary mx-auto rounded-full" />
-            <p className="text-muted-foreground mt-4">Prices are in UGX per single spot transmission</p>
+      
+{/* Rate Card Section */}
+<AnimatedSection className="py-24 border-t border-border/40 bg-[image:var(--gradient-dark)]">
+  <div className="section-container">
+    <div className="text-center max-w-2xl mx-auto mb-16">
+      <h2 className="text-3xl md:text-5xl font-heading text-foreground">
+        Spot Ad <span className="text-primary">Rate Card</span>
+      </h2>
+
+      <div className="w-16 h-1 mt-3 bg-primary mx-auto rounded-full" />
+
+      <p className="text-muted-foreground mt-4">
+        Prices are in UGX per single spot transmission
+      </p>
+    </div>
+
+    <div className="max-w-5xl mx-auto space-y-12">
+      {rateCards.map((card, index) => (
+        <div key={index} className="w-full">
+          {/* Rate Card Title */}
+          <div className="inline-block bg-gradient-to-b from-gray-400 via-gray-700 to-black px-2 py-1 mb-4">
+            <h3 className="text-white font-heading text-lg md:text-xl font-bold">
+              {card.title}
+            </h3>
           </div>
 
-          <div className="glass-card overflow-hidden shadow-2xl transition-all duration-700 border border-border/40">
-            <div className="overflow-x-auto">
-              <table className="w-full min-w-[650px]">
-                <thead>
-                  <tr className="bg-secondary/40 border-b border-border text-foreground/80">
-                    <th className="text-left px-6 py-4 text-xs uppercase tracking-wider font-semibold">Segment</th>
-                    <th className="text-left px-6 py-4 text-xs uppercase tracking-wider font-semibold">Schedule Time</th>
-                    <th className="text-right px-6 py-4 text-xs uppercase tracking-wider font-semibold">15 Sec</th>
-                    <th className="text-right px-6 py-4 text-xs uppercase tracking-wider font-semibold">30 Sec</th>
-                    <th className="text-right px-6 py-4 text-xs uppercase tracking-wider font-semibold">45 Sec</th>
-                    <th className="text-right px-6 py-4 text-xs uppercase tracking-wider font-semibold">60 Sec</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-border/30">
-                  {spotAds.map((row) => (
-                    <tr key={row.segment} className="hover:bg-secondary/20 transition-colors">
-                      <td className="px-6 py-4 font-heading text-xl text-foreground flex items-center gap-3">
-                        {getSegmentIcon(row.segment)}
-                        {row.segment}
-                      </td>
-                      <td className="px-6 py-4 text-sm text-muted-foreground">{row.time}</td>
-                      <td className="px-6 py-4 text-sm font-semibold text-foreground text-right">UGX {row.s15}</td>
-                      <td className="px-6 py-4 text-sm font-semibold text-foreground text-right">UGX {row.s30}</td>
-                      <td className="px-6 py-4 text-sm font-semibold text-foreground text-right">UGX {row.s45}</td>
-                      <td className="px-6 py-4 text-sm font-semibold text-foreground text-right">UGX {row.s60}</td>
-                    </tr>
+          {/* Rate Card Table */}
+          <div className="w-full overflow-x-auto">
+            <div className="min-w-[600px]">
+              {/* Duration Headers */}
+              <div
+                className="grid mb-1"
+                style={{
+                  gridTemplateColumns: `minmax(220px, 1.3fr) repeat(${card.durations.length}, minmax(120px, 1fr))`,
+                }}
+              >
+                <div />
+
+                {card.durations.map((duration) => (
+                  <div
+                    key={duration}
+                    className="bg-gradient-to-r from-yellow-300 to-orange-500 text-black text-center font-bold text-sm tracking-wider py-2 first:rounded-l-xl last:rounded-r-xl"
+                  >
+                    {duration}
+                  </div>
+                ))}
+              </div>
+
+              {/* Price Rows */}
+              {card.rows.map((row) => (
+                <div
+                  key={row.time}
+                  className="grid items-center"
+                  style={{
+                    gridTemplateColumns: `minmax(220px, 1.3fr) repeat(${card.durations.length}, minmax(120px, 1fr))`,
+                  }}
+                >
+                  <div className="text-foreground font-bold text-sm tracking-wider py-1">
+                    {row.time}
+                  </div>
+
+                  {row.prices.map((price, priceIndex) => (
+                    <div
+                      key={priceIndex}
+                      className="text-foreground text-center font-bold text-sm tracking-wider py-1"
+                    >
+                      {price}
+                    </div>
                   ))}
-                </tbody>
-              </table>
+                </div>
+              ))}
             </div>
           </div>
         </div>
-      </AnimatedSection>
+      ))}
+    </div>
+  </div>
+</AnimatedSection>
+
 
       {/* Improved Unified Contact/Partnership CTA Section */}
       <AnimatedSection className="py-24 bg-background border-t border-border/40">
