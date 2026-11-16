@@ -25,9 +25,6 @@ const UpcomingEventsSection = () => {
     <section ref={ref} className="py-20 bg-background">
       <div className="section-container">
         <div className="text-center mb-12">
-          <span className="text-xs uppercase tracking-[0.3em] text-primary font-semibold">
-            Save the Date
-          </span>
 
           <h2 className="text-3xl md:text-5xl font-heading text-foreground mt-2">
             Upcoming <span className="text-primary">Events</span>

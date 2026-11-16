@@ -1,9 +1,11 @@
+
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Radio, Tv } from "lucide-react";
-import { assets } from "@/lib/assets";
 import Equalizer from "@/components/Equalizer";
 import { useEffect, useRef, useState } from "react";
 import HLS from "hls.js";
+
+const STREAM_URL = "https://media.hydeinnovations.com/FACE-TV-HEVC/index.m3u8";
 
 const LiveTVSection = () => {
   const { ref, isVisible } = useScrollReveal();
@@ -14,32 +16,36 @@ const LiveTVSection = () => {
   useEffect(() => {
     if (!videoRef.current || !isVisible) return;
 
-    const streamUrl = "https://media.hydeinnovations.com/FACE-TV-HEVC/index.m3u8";
+    const video = videoRef.current;
+    let isMounted = true;
 
     const initStream = async () => {
       try {
-        // Ensure video is not muted and volume is full
-        if (videoRef.current) {
-          videoRef.current.muted = false;
-          videoRef.current.volume = 1;
-        }
+        video.muted = false;
+        video.volume = 1;
 
-        // Check if HLS is supported natively (Safari/iOS)
-        if (videoRef.current!.canPlayType("application/vnd.apple.mpegurl")) {
-          console.log("Using native HLS support");
-          videoRef.current!.src = streamUrl;
-          videoRef.current!.load();
-          await videoRef.current!.play();
-          setError(null);
-        } else if (HLS.isSupported()) {
-          // Use HLS.js for other browsers
-          console.log("Using HLS.js for streaming");
-          
-          if (hlsRef.current) {
-            hlsRef.current.destroy();
+        // Native HLS support (Safari/iOS)
+        if (video.canPlayType("application/vnd.apple.mpegurl")) {
+          video.src = STREAM_URL;
+          video.load();
+
+          try {
+            await video.play();
+
+            if (isMounted) {
+              setError(null);
+            }
+          } catch (err) {
+            console.error("Playback error:", err);
+
+            if (isMounted) {
+              setError("Unable to start the live stream. Press play to try again.");
+            }
           }
 
-          hlsRef.current = new HLS({
+        } else if (HLS.isSupported()) {
+          // HLS.js support (Chrome, Firefox and other browsers)
+          const hls = new HLS({
             autoStartLoad: true,
             startPosition: -1,
             debug: false,
@@ -48,76 +54,110 @@ const LiveTVSection = () => {
             backBufferLength: 90,
           });
 
-          hlsRef.current.loadSource(streamUrl);
-          hlsRef.current.attachMedia(videoRef.current);
+          hlsRef.current = hls;
 
-          hlsRef.current.on(HLS.Events.MANIFEST_PARSED, async () => {
-            console.log("HLS manifest parsed, starting playback");
+          hls.loadSource(STREAM_URL);
+          hls.attachMedia(video);
+
+          hls.on(HLS.Events.MANIFEST_PARSED, async () => {
             try {
-              videoRef.current!.muted = false;
-              videoRef.current!.volume = 1;
-              await videoRef.current?.play();
-              setError(null);
+              video.muted = false;
+              video.volume = 1;
+
+              await video.play();
+
+              if (isMounted) {
+                setError(null);
+              }
             } catch (err) {
               console.error("Playback error:", err);
-            }
-          });
 
-          hlsRef.current.on(HLS.Events.ERROR, (event, data) => {
-            console.error("HLS error:", data);
-            if (data.fatal) {
-              setError(`Streaming error: ${data.type}`);
-              switch (data.type) {
-                case HLS.ErrorTypes.NETWORK_ERROR:
-                  console.error("Network error loading HLS:", data);
-                  break;
-                case HLS.ErrorTypes.MEDIA_ERROR:
-                  console.error("Media error:", data);
-                  hlsRef.current?.recoverMediaError();
-                  break;
+              if (isMounted) {
+                setError("Press play to start the live stream.");
               }
             }
           });
+
+          hls.on(HLS.Events.ERROR, (_event, data) => {
+            console.error("HLS error:", data);
+
+            if (!data.fatal || !isMounted) return;
+
+            switch (data.type) {
+              case HLS.ErrorTypes.NETWORK_ERROR:
+                setError("Network error. Please check your internet connection.");
+                hls.startLoad();
+                break;
+
+              case HLS.ErrorTypes.MEDIA_ERROR:
+                setError("Recovering stream...");
+                hls.recoverMediaError();
+                break;
+
+              default:
+                setError("Unable to load the live stream. Please try again later.");
+                hls.destroy();
+                break;
+            }
+          });
+
         } else {
-          setError("HLS streaming not supported on this browser");
-          console.warn("HLS streaming not supported on this browser");
+          setError("HLS streaming is not supported by this browser.");
         }
+
       } catch (err) {
         console.error("Stream initialization error:", err);
-        setError("Failed to load stream");
+
+        if (isMounted) {
+          setError("Failed to load the live stream.");
+        }
       }
     };
 
     initStream();
 
     return () => {
+      isMounted = false;
+
       if (hlsRef.current) {
         hlsRef.current.destroy();
         hlsRef.current = null;
       }
+
+      video.pause();
+      video.removeAttribute("src");
+      video.load();
     };
   }, [isVisible]);
 
   return (
     <section ref={ref} className="py-20 bg-background">
       <div className="section-container">
+
+        {/* Heading */}
         <div className="flex items-center justify-center gap-3 mb-4">
           <Radio className="text-primary animate-pulse" size={24} />
+
           <h2 className="text-3xl md:text-4xl font-heading text-foreground">
             Watch <span className="text-primary">Live</span>
           </h2>
         </div>
+
         <p className="text-muted-foreground text-center mb-10 max-w-lg mx-auto">
-          Tune in to Face TV — StarTimes CH 223 DTT/Satellite Dish CH 528- 24 hours of non-stop Ugandan music.
+          Tune in to Face TV — StarTimes CH 223 DTT/Satellite Dish CH 528-
+          24 hours of non-stop Ugandan music.
         </p>
 
+        {/* Video Player */}
         <div
           className={`max-w-4xl mx-auto transition-all duration-700 ${
-            isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
+            isVisible
+              ? "opacity-100 scale-100"
+              : "opacity-0 scale-95"
           }`}
         >
           <div className="relative rounded-xl overflow-hidden glass-card">
-            {/* Live Stream Player */}
+
             <div className="aspect-video relative">
               <video
                 ref={videoRef}
@@ -126,24 +166,42 @@ const LiveTVSection = () => {
                 controls
                 className="w-full h-full object-cover bg-black"
               />
+
+              {/* Error Message */}
               {error && (
-                <div className="absolute inset-0 flex items-center justify-center bg-black/80">
-                  <p className="text-red-500 text-center px-4">{error}</p>
+                <div className="absolute inset-0 flex items-center justify-center bg-black/80 pointer-events-none">
+                  <p className="text-red-500 text-center px-4">
+                    {error}
+                  </p>
                 </div>
               )}
+
+              {/* Live Indicator */}
               <div className="absolute top-4 left-4 flex items-center gap-3 bg-primary/90 px-4 py-1.5 rounded-full shadow-lg">
                 <Equalizer />
-                <span className="text-sm font-bold text-primary-foreground uppercase tracking-widest drop-shadow-md">live</span>
+
+                <span className="text-sm font-bold text-primary-foreground uppercase tracking-widest drop-shadow-md">
+                  live
+                </span>
               </div>
+
+              {/* Video Information */}
               <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-background/90 to-transparent p-6">
                 <div className="flex items-center gap-3">
                   <Tv className="text-primary" size={20} />
+
                   <div>
-                    <p className="text-sm font-semibold text-foreground">Face TV — StarTimes CH 223</p>
-                    <p className="text-xs text-muted-foreground">The Home of Ugandan Music</p>
+                    <p className="text-sm font-semibold text-foreground">
+                      Face TV — StarTimes CH 223
+                    </p>
+
+                    <p className="text-xs text-muted-foreground">
+                      The Home of Ugandan Music
+                    </p>
                   </div>
                 </div>
               </div>
+
             </div>
           </div>
         </div>

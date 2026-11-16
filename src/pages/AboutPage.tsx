@@ -1,4 +1,4 @@
-import { assets } from "@/lib/assets";
+
 import { Target, Eye, Gem, Award, Calendar } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
 
@@ -20,79 +20,124 @@ const objectives = [
   "Build emotional bonds between brands and their customers through strategic partnerships.",
 ];
 
-const topTowns = ["Kampala", "Mbale", "Masaka", "Jinja", "Mukono", "Iganga", "Gulu", "Arua", "Mbarara", "Lira"];
-
 const AboutPage = () => {
-
   return (
     <div>
-      {/* Hero — KEPT */}
-  
+      {/* Hero */}
       <AnimatedSection className="py-28 bg-[image:var(--gradient-dark)] mb-20">
-        <div className=" section-container max-w-2xl mb-40">
-           <Calendar className="mx-auto mb-10 text-primary" size={36} /> 
-              <h1 className="text-5xl md:text-7xl font-heading text-foreground mb-6 text-center">
-                 Who<span className="text-primary">We Are</span>
-              </h1>
-          {/* <h2 className="text-5xl md:text-7xl text-center font-heading text-foreground mb-6">
-            Who <span className="text-primary">We Are</span>
-          </h2> */}
+        <div className="section-container max-w-2xl mb-40">
+          <Calendar className="mx-auto mb-10 text-primary" size={36} />
+
+          <h1 className="text-5xl md:text-7xl font-heading text-foreground mb-6 text-center">
+            Who<span className="text-primary">We Are</span>
+          </h1>
+
           <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-            FACE TV is a 24hr Ugandan music television channel aired on StarTimes cable network CH 223 DDT/Satellite Dish CH 528. The StarTimes platform has over 1.5 million decoders in circulation in Uganda, and over 14.5 million subscribers throughout Africa.
+            FACE TV is a 24hr Ugandan music television channel aired on
+            StarTimes cable network CH 223 DDT/Satellite Dish CH 528.
+            The StarTimes platform has over 1.5 million decoders in
+            circulation in Uganda, and over 14.5 million subscribers
+            throughout Africa.
           </p>
+
           <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-            There are over 470,000 decoders tuned in to FACE TV per day in Uganda alone. We own 35% viewership of StarTimes Pay TV and are the 4th most-watched local channel on the platform. Currently, FACE TV is aired across the East African region and in 32 other African Countries.
+            There are over 470,000 decoders tuned in to FACE TV per day
+            in Uganda alone. We own 35% viewership of StarTimes Pay TV
+            and are the 4th most-watched local channel on the platform.
+            Currently, FACE TV is aired across the East African region
+            and in 32 other African Countries.
           </p>
+
           <p className="text-lg text-muted-foreground leading-relaxed">
-            FACE TV is the first and only channel in Uganda and across Africa that plays solely Ugandan music content and features Uganda's broadest mix of contemporary artists and music genres. We support, promote and celebrate the talent and creativity of Ugandan artists, video directors, record labels and producers.
+            FACE TV is the first and only channel in Uganda and across
+            Africa that plays solely Ugandan music content and features
+            Uganda's broadest mix of contemporary artists and music
+            genres. We support, promote and celebrate the talent and
+            creativity of Ugandan artists, video directors, record
+            labels and producers.
           </p>
         </div>
       </AnimatedSection>
-      {/* Vision & Mission */}
+
       {/* Vision & Mission */}
       <AnimatedSection className="py-20 bg-background">
         <div className="section-container max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-10">
+
+          {/* Vision */}
           <div className="glass-card p-8">
             <div className="flex items-center gap-3 mb-4">
               <Eye className="text-primary" size={28} />
-              <h3 className="text-2xl font-heading text-foreground">Our Vision</h3>
+              <h3 className="text-2xl font-heading text-foreground">
+                Our Vision
+              </h3>
             </div>
+
             <p className="text-muted-foreground leading-relaxed">
-              To make FACE TV the biggest Ugandan music channel on the continent. FACE TV is the ultimate recognition of Ugandan Music globally — <span className="text-primary font-semibold">"THE HOME OF UGANDAN MUSIC"</span>.
+              To make FACE TV the biggest Ugandan music channel on
+              the continent. FACE TV is the ultimate recognition of
+              Ugandan Music globally —{" "}
+              <span className="text-primary font-semibold">
+                "THE HOME OF UGANDAN MUSIC"
+              </span>.
             </p>
           </div>
+
+          {/* Mission */}
           <div className="glass-card p-8">
             <div className="flex items-center gap-3 mb-4">
               <Target className="text-primary" size={28} />
-              <h3 className="text-2xl font-heading text-foreground">Our Mission</h3>
+              <h3 className="text-2xl font-heading text-foreground">
+                Our Mission
+              </h3>
             </div>
+
             <ul className="space-y-3 text-muted-foreground">
-              <li>• Produce an international platform to celebrate our cultural heritage and values.</li>
-              <li>• Give Ugandan artists a platform to air their creative work — LOCAL CONTENT 24hrs.</li>
-              <li>• Recognise up-coming artists as well as established talent globally.</li>
-              <li>• Create sustainable growth to the Ugandan music industry.</li>
+              <li>
+                • Produce an international platform to celebrate our
+                cultural heritage and values.
+              </li>
+              <li>
+                • Give Ugandan artists a platform to air their creative
+                work — LOCAL CONTENT 24hrs.
+              </li>
+              <li>
+                • Recognise up-coming artists as well as established
+                talent globally.
+              </li>
+              <li>
+                • Create sustainable growth to the Ugandan music industry.
+              </li>
             </ul>
           </div>
         </div>
       </AnimatedSection>
 
       {/* Values */}
-      {/* Values */}
       <AnimatedSection className="py-20 bg-[image:var(--gradient-dark)]">
         <div className="section-container text-center">
           <Gem className="mx-auto mb-3 text-primary" size={28} />
+
           <h2 className="text-3xl md:text-4xl font-heading text-foreground mb-2">
             Our <span className="text-primary">Values</span>
           </h2>
-          <p className="text-muted-foreground mb-10">The acronym of FACE TV stands for everything we believe in.</p>
+
+          <p className="text-muted-foreground mb-10">
+            The acronym of FACE TV stands for everything we believe in.
+          </p>
+
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 max-w-3xl mx-auto">
-            {values.map((v, i) => (
+            {values.map((v) => (
               <div
                 key={v.letter}
                 className="glass-card p-4 hover:border-primary/50"
               >
-                <p className="text-3xl font-heading text-primary">{v.letter}</p>
-                <p className="text-xs text-muted-foreground mt-1 uppercase tracking-wider">{v.word}</p>
+                <p className="text-3xl font-heading text-primary">
+                  {v.letter}
+                </p>
+
+                <p className="text-xs text-muted-foreground mt-1 uppercase tracking-wider">
+                  {v.word}
+                </p>
               </div>
             ))}
           </div>
@@ -100,15 +145,16 @@ const AboutPage = () => {
       </AnimatedSection>
 
       {/* Objectives */}
-      {/* Objectives */}
       <AnimatedSection className="py-20 bg-background">
         <div className="section-container max-w-4xl">
           <div className="flex items-center gap-3 mb-8">
             <Award className="text-primary" size={28} />
+
             <h2 className="text-3xl md:text-4xl font-heading text-foreground">
               Our <span className="text-primary">Objectives</span>
             </h2>
           </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {objectives.map((obj, i) => (
               <div
@@ -116,7 +162,9 @@ const AboutPage = () => {
                 className="glass-card p-5 hover:border-primary/30 transition-all"
               >
                 <p className="text-muted-foreground text-sm leading-relaxed">
-                  <span className="text-primary font-heading text-lg mr-2">0{i + 1}</span>
+                  <span className="text-primary font-heading text-lg mr-2">
+                    0{i + 1}
+                  </span>
                   {obj}
                 </p>
               </div>

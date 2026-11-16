@@ -2,13 +2,16 @@ import { useRef, useState } from "react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Play, Pause, Volume2 } from "lucide-react";
 import { Link } from "react-router-dom";
-import { assets } from "@/lib/assets";
+import PressPlay from "../../public/assets/PressPlay.mp4";
+import FaceHits from "../../public/assets/FaceHits.mp4";
+import RiseUp from "../../public/assets/RiseUp.mp4";
+import Collabs from "../../public/assets/Collabs.mp4";
 
 const shows = [
-  { title: "Press Play", desc: "The best new Ugandan music videos, curated daily.", video: assets.pressPlay },
-  { title: "The Spotlight", desc: "Daily entertainment news — trends, gossip, and exclusives.", video: assets.faceHits },
-  { title: "Rise Up", desc: "Intimate celebrity conversations and lifestyle stories.", video: assets.riseUp },
-  { title: "102 Collaborations", desc: "Weekend party anthems and DJ sets all Saturday long.", video: assets.collabs },
+  { title: "Press Play", desc: "The best new Ugandan music videos, curated daily.", video: PressPlay },
+  { title: "Face Hits", desc: "Daily entertainment news — trends, gossip, and exclusives.", video: FaceHits },
+  { title: "Rise Up", desc: "Intimate celebrity conversations and lifestyle stories.", video: RiseUp },
+  { title: "102 Collaborations", desc: "Weekend party anthems and DJ sets all Saturday long.", video: Collabs },
 ];
 
 const FeaturedShowsSection = () => {

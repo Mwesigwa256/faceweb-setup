@@ -1,4 +1,6 @@
-import { assets } from "@/lib/assets";
+import We from "../../public/assets/We.png";
+import epg from "../../public/assets/epg.png";
+import Home from "../../public/assets/Home.mp4";
 import StatsSection from "@/components/StatsSection";
 import LiveTVSection from "@/components/LiveTVSection";
 import FeaturedShowsSection from "@/components/FeaturedShowsSection";
@@ -8,7 +10,7 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 import ArtistsShowcase from "@/components/ArtistsShowcase";
 import BreakingNewsTicker from "@/components/BreakingNewsTicker";
 // import OurBrandsSection from "@/components/OurBrandsSection";
-import LatestNewsGrid from "@/components/LatestNewsGrid";
+
 import UpcomingEventsSection from "@/components/UpcomingEventsSection";
 import NewsletterSection from "@/components/NewsletterSection";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
@@ -43,7 +45,7 @@ const HomePage = () => {
       <SEO
         title="Face TV — The Home of Ugandan Music | 24/7 Live"
         description="Face TV is the home of Ugandan music. Watch live on StarTimes CH 223 / ST 199 across 32+ African countries — shows, news, artists and more."
-        image={assets.we}
+        image={We}
         jsonLd={jsonLd}
       />
       {/* Hero Video Section */}
@@ -55,7 +57,7 @@ const HomePage = () => {
           playsInline
           className="absolute inset-0 w-full h-full object-cover"
         >
-          <source src={assets.home} type="video/mp4" />
+          <source src={Home} type="video/mp4" />
         </video>
         <div
           className="absolute inset-0"
@@ -149,9 +151,9 @@ const HomePage = () => {
       </AnimatedSection>
       
       {/* Stats */}
-      <AnimatedSection delay={0.1}>
+      {/* <AnimatedSection delay={0.1}>
         <StatsSection />
-      </AnimatedSection>
+      </AnimatedSection> */}
 
       {/* Live TV */}
       <AnimatedSection>
@@ -196,13 +198,13 @@ const HomePage = () => {
           }`}
         >
           <img
-            src={assets.we}
+            src={We}
             alt="We"
             loading="lazy"
             className="h-32 md:h-44 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity"
           />
           <img
-            src={assets.epg}
+            src={epg}
             alt="EPG"
             loading="lazy"
             className="h-32 md:h-44 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity"
