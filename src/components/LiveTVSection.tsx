@@ -1,8 +1,7 @@
 
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { Radio, Tv } from "lucide-react";
-import Equalizer from "@/components/Equalizer";
-import { useEffect, useRef, useState } from "react";
+import { Maximize, Minimize, Radio, Tv } from "lucide-react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import HLS from "hls.js";
 
 const STREAM_URL = "https://media.hydeinnovations.com/FACE-TV-HEVC/index.m3u8";
@@ -12,6 +11,56 @@ const LiveTVSection = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const hlsRef = useRef<HLS | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const playerRef = useRef<HTMLDivElement>(null);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
+  useEffect(() => {
+    const onChange = () => {
+      const doc = document as Document & { webkitFullscreenElement?: Element };
+      const el = document.fullscreenElement ?? doc.webkitFullscreenElement;
+      setIsFullscreen(!!el && el === playerRef.current);
+    };
+
+    document.addEventListener("fullscreenchange", onChange);
+    document.addEventListener("webkitfullscreenchange", onChange);
+
+    return () => {
+      document.removeEventListener("fullscreenchange", onChange);
+      document.removeEventListener("webkitfullscreenchange", onChange);
+    };
+  }, []);
+
+  const toggleFullscreen = useCallback(async () => {
+    const container = playerRef.current as
+      | (HTMLDivElement & { webkitRequestFullscreen?: () => void })
+      | null;
+    const video = videoRef.current as
+      | (HTMLVideoElement & { webkitEnterFullscreen?: () => void })
+      | null;
+    const doc = document as Document & {
+      webkitFullscreenElement?: Element;
+      webkitExitFullscreen?: () => void;
+    };
+
+    try {
+      if (document.fullscreenElement || doc.webkitFullscreenElement) {
+        if (document.exitFullscreen) await document.exitFullscreen();
+        else doc.webkitExitFullscreen?.();
+        return;
+      }
+
+      if (container?.requestFullscreen) {
+        await container.requestFullscreen();
+      } else if (container?.webkitRequestFullscreen) {
+        container.webkitRequestFullscreen();
+      } else if (video?.webkitEnterFullscreen) {
+        // iPhone Safari only supports fullscreen on the video element itself
+        video.webkitEnterFullscreen();
+      }
+    } catch (err) {
+      console.error("Fullscreen error:", err);
+    }
+  }, []);
 
   useEffect(() => {
     if (!videoRef.current || !isVisible) return;
@@ -158,13 +207,19 @@ const LiveTVSection = () => {
         >
           <div className="relative rounded-xl overflow-hidden glass-card">
 
-            <div className="aspect-video relative">
+            <div
+              ref={playerRef}
+              className={`relative bg-black ${
+                isFullscreen ? "w-full h-full" : "aspect-video"
+              }`}
+            >
               <video
                 ref={videoRef}
                 autoPlay
                 playsInline
                 controls
-                className="w-full h-full object-cover bg-black"
+                onDoubleClick={toggleFullscreen}
+                className="w-full h-full object-contain bg-black"
               />
 
               {/* Error Message */}
@@ -177,31 +232,37 @@ const LiveTVSection = () => {
               )}
 
               {/* Live Indicator */}
-              <div className="absolute top-4 left-4 flex items-center gap-3 bg-primary/90 px-4 py-1.5 rounded-full shadow-lg">
-                <Equalizer />
-
+              <div className="absolute top-4 left-4 flex items-center gap-3 bg-primary/90 px-4 py-1.5 rounded-full shadow-lg pointer-events-none">
                 <span className="text-sm font-bold text-primary-foreground uppercase tracking-widest drop-shadow-md">
                   live
                 </span>
               </div>
 
-              {/* Video Information */}
-              <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-background/90 to-transparent p-6">
-                <div className="flex items-center gap-3">
-                  <Tv className="text-primary" size={20} />
+              {/* Fullscreen Toggle */}
+              <button
+                type="button"
+                onClick={toggleFullscreen}
+                aria-label={isFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
+                title={isFullscreen ? "Exit fullscreen" : "Fullscreen"}
+                className="absolute top-4 right-4 z-10 flex items-center justify-center w-10 h-10 rounded-full bg-black/60 text-white hover:bg-primary transition-colors"
+              >
+                {isFullscreen ? <Minimize size={18} /> : <Maximize size={18} />}
+              </button>
+            </div>
 
-                  <div>
-                    <p className="text-sm font-semibold text-foreground">
-                      Face TV — StarTimes CH 223
-                    </p>
+            {/* Video Information */}
+            <div className="flex items-center gap-3 p-4">
+              <Tv className="text-primary" size={20} />
 
-                    <p className="text-xs text-muted-foreground">
-                      The Home of Ugandan Music
-                    </p>
-                  </div>
-                </div>
+              <div>
+                <p className="text-sm font-semibold text-foreground">
+                  Face TV — StarTimes CH 223
+                </p>
+
+                <p className="text-xs text-muted-foreground">
+                  The Home of Ugandan Music
+                </p>
               </div>
-
             </div>
           </div>
         </div>
