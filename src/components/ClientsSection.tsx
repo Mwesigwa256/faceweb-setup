@@ -1,9 +1,9 @@
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const clients = [
-  { name: "Sprite", logo: "/images/client-sprite.jpg" },
-  { name: "Startimes", logo: "/images/star.png" },
-  { name: "Tooro", logo: "/images/tooro.png" },
+  { name: "Hyde", logo: "/assets/client-hyde.png" },
+  { name: "Startimes", logo: "/assets/star.png" },
+  { name: "Tooro", logo: "/assets/tooro.png" },
 ];
 
 const ClientsSection = () => {

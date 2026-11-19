@@ -95,42 +95,70 @@ const SchedulePage = () => {
 
       {/* Day Tabs */}
       <section ref={ref} className="py-16 bg-background">
-        <div className="section-container max-w-4xl">
-          <div className="flex flex-wrap justify-center gap-2 mb-10">
-            {days.map((day) => (
-              <button
-                key={day}
-                onClick={() => setActiveDay(day)}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-300 ${
-                  activeDay === day
-                    ? "text-primary-foreground"
-                    : "glass-card text-muted-foreground hover:text-foreground"
-                }`}
-                style={activeDay === day ? { background: "var(--gradient-primary)" } : undefined}
-              >
-                {day}
-              </button>
-            ))}
-          </div>
+        <div className="section-container max-w-6xl grid gap-8 md:grid-cols-[220px_1fr] md:items-start">
+          {/* Left: day selector */}
+          <aside className="md:sticky md:top-28">
+            <p className="hidden md:block mb-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+              Select a day
+            </p>
+            <div className="flex flex-wrap justify-center gap-2 md:flex-col md:flex-nowrap">
+              {days.map((day) => (
+                <button
+                  key={day}
+                  onClick={() => setActiveDay(day)}
+                  className={`px-4 py-2 md:py-3 rounded-md text-sm font-medium text-left transition-all duration-300 md:flex md:items-center md:justify-between ${
+                    activeDay === day
+                      ? "text-primary-foreground"
+                      : "glass-card text-muted-foreground hover:text-foreground"
+                  }`}
+                  style={activeDay === day ? { background: "var(--gradient-primary)" } : undefined}
+                >
+                  <span>{day}</span>
+                  <span className="hidden md:inline text-xs opacity-70 tabular-nums">
+                    {schedule[day].length} shows
+                  </span>
+                </button>
+              ))}
+            </div>
+          </aside>
 
+          {/* Right: schedule table */}
           <div
             className={`transition-all duration-500 ${
               isVisible ? "opacity-100" : "opacity-0"
             }`}
           >
+            <h2 className="mb-4 text-2xl md:text-3xl font-heading text-foreground">
+              {activeDay} <span className="text-primary">Lineup</span>
+            </h2>
             <div className="glass-card overflow-hidden">
-              <table className="w-full">
+              <table className="w-full table-fixed border-collapse">
+                <colgroup>
+                  <col className="w-36 sm:w-44" />
+                  <col />
+                </colgroup>
                 <thead>
                   <tr className="border-b border-border">
-                    <th className="text-left px-6 py-4 text-sm uppercase tracking-wider text-muted-foreground">Time</th>
-                    <th className="text-left px-6 py-4 text-sm uppercase tracking-wider text-muted-foreground">Program</th>
+                    <th className="text-left align-middle px-4 sm:px-8 py-4 text-xs sm:text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+                      Time
+                    </th>
+                    <th className="text-right align-middle px-4 sm:px-8 py-4 text-xs sm:text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+                      Program
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
                   {schedule[activeDay].map((slot, i) => (
-                    <tr key={i} className="border-b border-border/50 hover:bg-secondary/30 transition-colors">
-                      <td className="px-6 py-4 text-sm text-muted-foreground whitespace-nowrap">{slot.time}</td>
-                      <td className="px-6 py-4 font-heading text-lg text-foreground">{slot.show}</td>
+                    <tr
+                      key={i}
+                      className="border-b border-border/50 last:border-b-0 hover:bg-secondary/30 transition-colors"
+                    >
+                      <td className="align-middle px-4 sm:px-8 py-4 text-sm text-muted-foreground tabular-nums whitespace-nowrap">
+                        {slot.time}
+                      </td>
+                      <td className="text-right align-middle px-4 sm:px-8 py-4 font-heading text-base sm:text-lg leading-tight text-foreground break-words">
+                        {slot.show}
+                      </td>
                     </tr>
                   ))}
                 </tbody>

@@ -95,8 +95,6 @@ const ShowsPage = () => {
       ? shows
       : shows.filter((s) => s.category === activeCategory);
 
-  // Clicking anywhere on a card plays/pauses it. While a video is playing,
-  // clicks on the video itself go to its native controls instead.
   const handleCardClick = (e: MouseEvent, index: number) => {
     if (activeIndex === index && (e.target as HTMLElement).tagName === "VIDEO") {
       return;
