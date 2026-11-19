@@ -1,0 +1,5 @@
+project_id = "fryltjvkitqahteiwpcn"
+
+[functions.notify-submission]
+# Called by the database trigger, authenticated with x-webhook-secret instead of a JWT
+verify_jwt = false
