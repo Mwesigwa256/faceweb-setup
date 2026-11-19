@@ -150,10 +150,6 @@ const HomePage = () => {
         <UpcomingEventsSection />
       </AnimatedSection>
       
-      {/* Stats */}
-      {/* <AnimatedSection delay={0.1}>
-        <StatsSection />
-      </AnimatedSection> */}
 
       {/* Live TV */}
       <AnimatedSection>
@@ -184,33 +180,6 @@ const HomePage = () => {
       <AnimatedSection>
         <TestimonialsSection />
       </AnimatedSection>
-
-      {/* Newsletter CTA */}
-      <AnimatedSection>
-        <NewsletterSection />
-      </AnimatedSection>
-
-      {/* Brand Logos */}
-      <section ref={brandsRef} className="py-20" style={{ background: "var(--gradient-dark)" }}>
-        <div
-          className={`section-container flex flex-col md:flex-row items-center justify-center gap-12 transition-all duration-700 ${
-            brandsVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
-        >
-          <img
-            src={We}
-            alt="We"
-            loading="lazy"
-            className="h-32 md:h-44 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity"
-          />
-          <img
-            src={epg}
-            alt="EPG"
-            loading="lazy"
-            className="h-32 md:h-44 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity"
-          />
-        </div>
-      </section>
 
       {/* Social */}
       <SocialSection />
