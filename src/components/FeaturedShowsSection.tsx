@@ -1,8 +1,9 @@
 
-import { useRef, useState } from "react";
+import type { MouseEvent } from "react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Play, Volume2 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useExclusiveVideoPlayback } from "@/hooks/useExclusiveVideoPlayback";
 
 // Video assets from the public folder
 const PressPlay = "/assets/PressPlay.mp4";
@@ -36,71 +37,16 @@ const shows = [
 const FeaturedShowsSection = () => {
   const { ref, isVisible } = useScrollReveal();
 
-  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const { activeIndex, setVideoRef, toggle, handlePlay, handlePause } =
+    useExclusiveVideoPlayback();
 
-  // Play or pause a selected video
-  const togglePlay = async (index: number) => {
-    const video = videoRefs.current[index];
-
-    if (!video) return;
-
-    if (activeIndex === index && !video.paused) {
-      video.pause();
-      video.muted = true;
-      setActiveIndex(null);
+  // Clicking anywhere on a card plays/pauses it. While a video is playing,
+  // clicks on the video itself go to its native controls instead.
+  const handleCardClick = (e: MouseEvent, index: number) => {
+    if (activeIndex === index && (e.target as HTMLElement).tagName === "VIDEO") {
       return;
     }
-
-    // Pause all other videos
-    videoRefs.current.forEach((otherVideo, otherIndex) => {
-      if (otherVideo && otherIndex !== index) {
-        otherVideo.pause();
-        otherVideo.muted = true;
-      }
-    });
-
-    video.muted = false;
-    video.volume = 1;
-
-    try {
-      await video.play();
-      setActiveIndex(index);
-    } catch (error) {
-      console.error("Video playback failed:", error);
-
-      // Fallback for browsers restricting sound playback
-      try {
-        video.muted = true;
-        await video.play();
-        setActiveIndex(index);
-      } catch (fallbackError) {
-        console.error(
-          "Muted video playback also failed:",
-          fallbackError
-        );
-        setActiveIndex(null);
-      }
-    }
-  };
-
-  // Synchronize state when a video starts playing
-  const handleVideoPlay = (index: number) => {
-    videoRefs.current.forEach((video, otherIndex) => {
-      if (video && otherIndex !== index && !video.paused) {
-        video.pause();
-        video.muted = true;
-      }
-    });
-
-    setActiveIndex(index);
-  };
-
-  // Synchronize state when a video is paused
-  const handleVideoPause = (index: number) => {
-    setActiveIndex((current) =>
-      current === index ? null : current
-    );
+    toggle(index);
   };
 
   return (
@@ -123,7 +69,17 @@ const FeaturedShowsSection = () => {
           {shows.map((show, i) => (
             <div
               key={show.title}
-              className={`glass-card overflow-hidden group transition-all duration-700 hover:border-primary/50 ${
+              role="button"
+              tabIndex={0}
+              aria-label={`${activeIndex === i ? "Pause" : "Play"} ${show.title}`}
+              onClick={(e) => handleCardClick(e, i)}
+              onKeyDown={(e) => {
+                if (e.target === e.currentTarget && (e.key === "Enter" || e.key === " ")) {
+                  e.preventDefault();
+                  toggle(i);
+                }
+              }}
+              className={`glass-card overflow-hidden group cursor-pointer transition-all duration-700 hover:border-primary/50 ${
                 isVisible
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-8"
@@ -133,32 +89,29 @@ const FeaturedShowsSection = () => {
               {/* Video thumbnail */}
               <div className="relative aspect-video overflow-hidden bg-black">
                 <video
-                  ref={(el) => {
-                    videoRefs.current[i] = el;
-                  }}
+                  ref={setVideoRef(i)}
                   playsInline
                   loop
                   muted
                   preload="metadata"
                   controls={activeIndex === i}
                   className="w-full h-full object-cover"
-                  onPlay={() => handleVideoPlay(i)}
-                  onPause={() => handleVideoPause(i)}
+                  onPlay={() => handlePlay(i)}
+                  onPause={() => handlePause(i)}
                   onError={() => {
                     console.error(
                       `Unable to load video: ${show.video}`
                     );
                   }}
                 >
-                  <source src={show.video} type="video/mp4" />
+                  {/* #t=0.5 shows a real frame as the thumbnail instead of black */}
+                  <source src={`${show.video}#t=0.5`} type="video/mp4" />
                 </video>
 
                 {/* Play overlay */}
                 {activeIndex !== i && (
-                  <button
-                    type="button"
-                    aria-label={`Play ${show.title}`}
-                    onClick={() => togglePlay(i)}
+                  <div
+                    aria-hidden="true"
                     className="absolute inset-0 bg-background/40 flex items-center justify-center transition-all duration-300 group-hover:bg-background/30"
                   >
                     <div className="w-20 h-20 md:w-16 md:h-16 rounded-full bg-primary/90 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform active:scale-95">
@@ -167,7 +120,7 @@ const FeaturedShowsSection = () => {
                         size={32}
                       />
                     </div>
-                  </button>
+                  </div>
                 )}
 
                 {/* Playing indicator */}

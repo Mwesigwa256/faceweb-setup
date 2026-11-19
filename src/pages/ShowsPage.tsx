@@ -1,8 +1,10 @@
 
-import { useState, useRef } from "react";
+import { useState } from "react";
+import type { MouseEvent } from "react";
 import { Play, Filter } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
 import SEO from "@/components/SEO";
+import { useExclusiveVideoPlayback } from "@/hooks/useExclusiveVideoPlayback";
 
 // Video assets from the public folder
 const pressPlay = "/assets/PressPlay.mp4";
@@ -85,85 +87,21 @@ const categories: Category[] = [
 
 const ShowsPage = () => {
   const [activeCategory, setActiveCategory] = useState<Category>("All");
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
-
-  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+  const { activeIndex, setVideoRef, toggle, stopAll, handlePlay, handlePause } =
+    useExclusiveVideoPlayback();
 
   const filtered =
     activeCategory === "All"
       ? shows
       : shows.filter((s) => s.category === activeCategory);
 
-  // Stop all currently playing videos
-  const stopAllVideos = () => {
-    videoRefs.current.forEach((video) => {
-      if (video) {
-        video.pause();
-        video.muted = true;
-      }
-    });
-
-    setActiveIndex(null);
-  };
-
-  // Play or pause a selected video
-  const toggleVideo = async (index: number) => {
-    const video = videoRefs.current[index];
-
-    if (!video) return;
-
-    if (activeIndex === index && !video.paused) {
-      video.pause();
-      video.muted = true;
-      setActiveIndex(null);
+  // Clicking anywhere on a card plays/pauses it. While a video is playing,
+  // clicks on the video itself go to its native controls instead.
+  const handleCardClick = (e: MouseEvent, index: number) => {
+    if (activeIndex === index && (e.target as HTMLElement).tagName === "VIDEO") {
       return;
     }
-
-    // Stop other videos before playing the selected one
-    videoRefs.current.forEach((otherVideo, otherIndex) => {
-      if (otherVideo && otherIndex !== index) {
-        otherVideo.pause();
-        otherVideo.muted = true;
-      }
-    });
-
-    video.muted = false;
-    video.volume = 1;
-
-    try {
-      await video.play();
-      setActiveIndex(index);
-    } catch (error) {
-      console.error("Video playback failed:", error);
-
-      // Fallback for browsers that restrict sound playback
-      try {
-        video.muted = true;
-        await video.play();
-        setActiveIndex(index);
-      } catch (fallbackError) {
-        console.error("Muted video playback also failed:", fallbackError);
-        setActiveIndex(null);
-      }
-    }
-  };
-
-  // Keep the active video state synchronized with native controls
-  const handleVideoPlay = (index: number) => {
-    videoRefs.current.forEach((video, otherIndex) => {
-      if (video && otherIndex !== index && !video.paused) {
-        video.pause();
-        video.muted = true;
-      }
-    });
-
-    setActiveIndex(index);
-  };
-
-  const handleVideoPause = (index: number) => {
-    setActiveIndex((current) =>
-      current === index ? null : current
-    );
+    toggle(index);
   };
 
   return (
@@ -214,7 +152,7 @@ const ShowsPage = () => {
               <button
                 key={cat}
                 onClick={() => {
-                  stopAllVideos();
+                  stopAll();
                   setActiveCategory(cat);
                 }}
                 className={`px-5 py-2 rounded-full text-sm font-semibold uppercase tracking-wider transition-all duration-300 hover:scale-105 ${
@@ -242,46 +180,53 @@ const ShowsPage = () => {
             {filtered.map((show, index) => (
               <div
                 key={show.title}
-                className="glass-card overflow-hidden group transition-all duration-500 hover:border-primary hover:shadow-[0_0_30px_rgba(255,0,0,0.2)]"
+                role="button"
+                tabIndex={0}
+                aria-label={`${activeIndex === index ? "Pause" : "Play"} ${show.title}`}
+                onClick={(e) => handleCardClick(e, index)}
+                onKeyDown={(e) => {
+                  if (e.target === e.currentTarget && (e.key === "Enter" || e.key === " ")) {
+                    e.preventDefault();
+                    toggle(index);
+                  }
+                }}
+                className="glass-card overflow-hidden group cursor-pointer transition-all duration-500 hover:border-primary hover:shadow-[0_0_30px_rgba(255,0,0,0.2)]"
               >
                 {/* Video thumbnail */}
                 <div className="relative aspect-video overflow-hidden bg-black">
                   <video
-                    ref={(el) => {
-                      videoRefs.current[index] = el;
-                    }}
+                    ref={setVideoRef(index)}
                     className="w-full h-full object-cover"
                     playsInline
                     loop
                     muted
                     preload="metadata"
                     controls={activeIndex === index}
-                    onPlay={() => handleVideoPlay(index)}
-                    onPause={() => handleVideoPause(index)}
+                    onPlay={() => handlePlay(index)}
+                    onPause={() => handlePause(index)}
                     onError={() => {
                       console.error(
                         `Unable to load video: ${show.video}`
                       );
                     }}
                   >
-                    <source src={show.video} type="video/mp4" />
+                    {/* #t=0.5 shows a real frame as the thumbnail instead of black */}
+                    <source src={`${show.video}#t=0.5`} type="video/mp4" />
                   </video>
 
                   {/* Play overlay */}
                   {activeIndex !== index && (
-                    <button
-                      type="button"
-                      aria-label={`Play ${show.title}`}
-                      onClick={() => toggleVideo(index)}
-                      className="absolute inset-0 bg-background/30 flex items-center justify-center md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300"
+                    <div
+                      aria-hidden="true"
+                      className="absolute inset-0 bg-background/30 flex items-center justify-center transition-colors duration-300 group-hover:bg-background/20"
                     >
-                      <div className="w-20 h-20 md:w-16 md:h-16 rounded-full bg-primary/90 flex items-center justify-center shadow-xl active:scale-95 transition-transform">
+                      <div className="w-20 h-20 md:w-16 md:h-16 rounded-full bg-primary/90 flex items-center justify-center shadow-xl group-hover:scale-110 active:scale-95 transition-transform">
                         <Play
                           className="text-primary-foreground ml-1"
                           size={32}
                         />
                       </div>
-                    </button>
+                    </div>
                   )}
 
                   {/* Category badge */}
